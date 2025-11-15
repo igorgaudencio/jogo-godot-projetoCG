@@ -183,7 +183,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5y10m"]
-size = Vector2(20, 34.25)
+size = Vector2(20, 34.125)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xiabt"]
 
@@ -339,10 +339,10 @@ script = ExtResource("1_jbf3o")
 position = Vector2(72, 299)
 scale = Vector2(0.53125, 0.4609375)
 sprite_frames = SubResource("SpriteFrames_cagsi")
-animation = &"run"
+animation = &"dash"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-position = Vector2(70, 304)
+position = Vector2(70, 304.0625)
 shape = SubResource("RectangleShape2D_5y10m")
 
 [node name="Camera2D" type="Camera2D" parent="player"]
@@ -382,7 +382,7 @@ script = ExtResource("25_bwup2")
 position = Vector2(6529, -559)
 scale = Vector2(6.368165, 4.666821)
 sprite_frames = SubResource("SpriteFrames_3c0gt")
-animation = &"attack"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 position = Vector2(5681, 448)
