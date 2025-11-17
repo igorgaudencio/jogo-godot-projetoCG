@@ -22,7 +22,7 @@ signal health_changed(value)
 # ===============================
 @export var dash_speed: float = 450.0
 @export var dash_duration: float = 0.2
-@export var dash_clicks_required: int = 4
+@export var dash_clicks_required: int = 2
 @export var dash_click_time: float = 0.4 # segundos entre cliques
 var dash_timer: float = 0.0
 var dash_direction: int = 0
