@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cpnc5prwxjdi5"]
+[gd_scene load_steps=32 format=3 uid="uid://cpnc5prwxjdi5"]
 
 [ext_resource type="Texture2D" uid="uid://cp1joxyr3myf4" path="res://FinalBackground1.png" id="1_ajd5l"]
 [ext_resource type="Script" uid="uid://ifjkygv3heus" path="res://player.gd" id="1_jbf3o"]
@@ -24,17 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://y8edb0pdn3pi" path="res://cavaleiro_idle_anda17.png" id="22_m130b"]
 [ext_resource type="Script" uid="uid://bktuudec1sq6r" path="res://lava.gd" id="23_jwcdh"]
 [ext_resource type="Script" uid="uid://dxh2ipl12e5r0" path="res://hud.gd" id="24_ajd5l"]
-[ext_resource type="Script" uid="uid://cpthy23mr0ghc" path="res://enemy.gd" id="25_bwup2"]
 [ext_resource type="Texture2D" uid="uid://tjybv3jei76w" path="res://hp.png" id="25_f5ryn"]
-[ext_resource type="Texture2D" uid="uid://dgtnrwwuqguge" path="res://GOLEM_PROJETO_DE_PANCADA1.png" id="26_f5ryn"]
-[ext_resource type="Texture2D" uid="uid://ddj8b27actx4e" path="res://GOLEM_PROJETO_DE_PANCADA2.png" id="27_v6gdw"]
-[ext_resource type="Texture2D" uid="uid://d1ubk34h6fnva" path="res://GOLEM_PROJETO_DE_PANCADA3.png" id="28_btv8m"]
-[ext_resource type="Texture2D" uid="uid://cf770rmu4hd63" path="res://GOLEM_PROJETO_DE_PANCADA4.png" id="29_bmfvi"]
-[ext_resource type="Texture2D" uid="uid://dlm2fgk3yh4jg" path="res://GOLEM_PROJETO_DE_PANCADA5.png" id="30_ae4qt"]
-[ext_resource type="Texture2D" uid="uid://bccig2weume02" path="res://GOLEM_PARADO.png" id="31_m130b"]
-[ext_resource type="Texture2D" uid="uid://7yijuplksbmx" path="res://GOLEM_PROJETO_ANDANDO1.png" id="32_cagsi"]
-[ext_resource type="Texture2D" uid="uid://8hqhmxio48bi" path="res://GOLEM_PROJETO_ANDANDO2.png" id="33_43maw"]
-[ext_resource type="Texture2D" uid="uid://carudm0elc03c" path="res://GOLEM_PROJETO_ANDANDO3.png" id="34_r5ua5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ajd5l"]
 animations = [{
@@ -186,62 +176,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5y10m"]
 size = Vector2(20, 34.25)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_3c0gt"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("26_f5ryn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_v6gdw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_btv8m")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_bmfvi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_ae4qt")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"die",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("31_m130b")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("32_cagsi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("33_43maw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("34_r5ua5")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrikd"]
-size = Vector2(242, 219)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2od3p"]
-radius = 421.93008
-
 [node name="Node2D" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -329,7 +263,7 @@ polygon = PackedVector2Array(-73, -354, 453, -344, 455, -238, 539, -233, 539, -1
 shape = SubResource("SegmentShape2D_ajd5l")
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="chao"]
-polygon = PackedVector2Array(2201, -15, 2221, -23, 2231, -14, 2236, -12, 2238, -9, 2252, -7, 2254, -16, 2264, -18, 2271, -24, 2282, -21, 2291, -18, 2291, -11, 2287, -2, 2293, 6, 2301, 2, 2522, 3, 2529, -10, 2540, -10, 2541, -24, 2553, -25, 2554, -36, 2566, -37, 2567, -48, 2579, -49, 2578, -60, 2590, -60, 2586, -80, 2657, -75, 2656, -88, 2671, -90, 2670, -100, 2682, -100, 2682, -110, 2693, -112, 2695, -126, 2768, -126, 3690, -123, 3694, -113, 3707, -114, 3706, -96, 3718, -96, 3722, -87, 3733, -88, 3735, -71, 3794, -77, 3803, -58, 3812, -58, 3813, -47, 3824, -44, 3824, -36, 3834, -34, 3836, -26, 3846, -25, 3851, -11, 3860, -10, 3860, 2, 4072, 2, 4076, 19, 4086, 19, 4085, 29, 4105, 30, 4104, 38, 4112, 38, 4112, 45, 4124, 46, 4125, 60, 4141, 58, 4143, 73, 4152, 72, 4152, 81, 4161, 81, 4165, 94, 4178, 94, 4177, 106, 4185, 106, 4184, 119, 4199, 119, 4200, 130, 4212, 130, 4214, 135, 4709, 134, 5716, 133, 6415, 125, 6417, 150, 2285, 145, 2256, 77, 2250, 47, 2243, 29, 2227, 22, 2210, 16, 2208, -7)
+polygon = PackedVector2Array(2201, -15, 2221, -23, 2231, -14, 2236, -12, 2238, -9, 2252, -7, 2254, -16, 2264, -18, 2271, -24, 2282, -21, 2291, -18, 2291, -11, 2287, -2, 2293, 6, 2301, 2, 2522, 3, 2529, -10, 2540, -10, 2541, -24, 2553, -25, 2554, -36, 2566, -37, 2567, -48, 2579, -49, 2578, -60, 2590, -60, 2586, -80, 2657, -75, 2656, -88, 2671, -90, 2670, -100, 2682, -100, 2682, -110, 2693, -112, 2695, -126, 2768, -126, 3690, -123, 3694, -113, 3707, -114, 3706, -96, 3718, -96, 3722, -87, 3733, -88, 3735, -71, 3794, -77, 3803, -58, 3812, -58, 3813, -47, 3824, -44, 3824, -36, 3834, -34, 3836, -26, 3846, -25, 3851, -11, 3860, -10, 3860, 2, 4072, 2, 4076, 19, 4086, 19, 4085, 29, 4105, 30, 4104, 38, 4112, 38, 4112, 45, 4124, 46, 4125, 60, 4141, 58, 4143, 73, 4152, 72, 4152, 81, 4161, 81, 4165, 94, 4178, 94, 4177, 106, 4185, 106, 4184, 119, 4199, 119, 4200, 130, 4212, 130, 4214, 135, 4709, 134, 6402, 149, 6422, -455, 6524, 147, 2285, 145, 2256, 77, 2250, 47, 2243, 29, 2227, 22, 2210, 16, 2208, -7)
 
 [node name="player" type="CharacterBody2D" parent="." groups=["player"]]
 script = ExtResource("1_jbf3o")
@@ -354,7 +288,6 @@ limit_smoothed = true
 
 [node name="lava" type="Area2D" parent="."]
 script = ExtResource("23_jwcdh")
-damage = 500
 damage_interval = 0.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="lava"]
@@ -381,26 +314,22 @@ tint_over = Color(0.9372549, 0.011764706, 0, 1)
 tint_progress = Color(1, 1, 0.48235294, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Enemy" type="CharacterBody2D" parent="."]
-script = ExtResource("25_bwup2")
+[node name="Enemy" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
-position = Vector2(6529, -559)
-scale = Vector2(6.368165, 4.666821)
-sprite_frames = SubResource("SpriteFrames_3c0gt")
-animation = &"attack"
+[node name="Golem" type="CharacterBody2D" parent="Enemy"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(5681, 448)
-shape = SubResource("RectangleShape2D_mrikd")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy/Golem"]
 
-[node name="DetectionArea" type="Area2D" parent="Enemy"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemy/Golem"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/DetectionArea"]
-position = Vector2(5658, 480)
-shape = SubResource("CircleShape2D_2od3p")
+[node name="Area2D" type="Area2D" parent="Enemy/Golem"]
 
-[node name="AttackCooldown" type="Timer" parent="Enemy"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Golem/Area2D"]
+position = Vector2(1, 0)
+
+[node name="Timer" type="Timer" parent="Enemy/Golem"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Enemy"]
 
 [connection signal="health_changed" from="player" to="HUD" method="_on_player_health_changed"]
 [connection signal="body_entered" from="lava" to="lava" method="_on_body_entered"]
