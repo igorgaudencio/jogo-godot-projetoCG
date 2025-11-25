@@ -1,14 +1,13 @@
-[gd_scene load_steps=32 format=3 uid="uid://cpnc5prwxjdi5"]
+[gd_scene load_steps=31 format=3 uid="uid://cpnc5prwxjdi5"]
 
-[ext_resource type="Texture2D" uid="uid://cp1joxyr3myf4" path="res://FinalBackground1.png" id="1_ajd5l"]
+[ext_resource type="Texture2D" uid="uid://c6ohw3sd4udu3" path="res://FinalBackground1.png" id="1_ajd5l"]
 [ext_resource type="Script" uid="uid://ifjkygv3heus" path="res://SCRIPTS/player.gd" id="1_jbf3o"]
-[ext_resource type="Texture2D" uid="uid://c2npn2gppwlxg" path="res://FinalBackground2.png" id="2_7wsrq"]
+[ext_resource type="Texture2D" uid="uid://db2xsuojh0kjn" path="res://FinalBackground2.png" id="2_7wsrq"]
 [ext_resource type="Texture2D" uid="uid://dh4yldugnwwsd" path="res://CAVALEIRO/cavaleiro_idle_anda1.png" id="2_qdr6j"]
-[ext_resource type="Texture2D" uid="uid://lp7riopv1dpk" path="res://FinalBackground3.png" id="3_1vss3"]
+[ext_resource type="Texture2D" uid="uid://km4ewmvfc2bc" path="res://FinalBackground3.png" id="3_1vss3"]
 [ext_resource type="Texture2D" uid="uid://bu3qju1sga3vm" path="res://CAVALEIRO/cavaleiro_idle_anda2.png" id="4_2l2ij"]
-[ext_resource type="Texture2D" uid="uid://bkb3wwvn8ggiy" path="res://FinalBackground4.png" id="4_t8g44"]
+[ext_resource type="Texture2D" uid="uid://bqh21xbuy3cim" path="res://FinalBackground4.png" id="4_t8g44"]
 [ext_resource type="Texture2D" uid="uid://yf6pwljb1qo6" path="res://CAVALEIRO/cavaleiro_idle_anda3.png" id="5_jwcdh"]
-[ext_resource type="PackedScene" uid="uid://cjlpt50tq3w2i" path="res://CENAS/golem.tscn" id="5_yw1ev"]
 [ext_resource type="Texture2D" uid="uid://cvfdo7183o00k" path="res://CAVALEIRO/cavaleiro_idle_anda4.png" id="6_ajd5l"]
 [ext_resource type="Texture2D" uid="uid://qttb56ijgfcl" path="res://CAVALEIRO/cavaleiro_idle_anda5.png" id="7_7wsrq"]
 [ext_resource type="Texture2D" uid="uid://cjycnc4u6a55t" path="res://CAVALEIRO/cavaleiro_idle_anda6.png" id="8_1vss3"]
@@ -25,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://y8edb0pdn3pi" path="res://CAVALEIRO/cavaleiro_idle_anda17.png" id="22_m130b"]
 [ext_resource type="Script" uid="uid://bktuudec1sq6r" path="res://SCRIPTS/lava.gd" id="23_jwcdh"]
 [ext_resource type="Script" uid="uid://dxh2ipl12e5r0" path="res://SCRIPTS/hud.gd" id="24_ajd5l"]
-[ext_resource type="Texture2D" uid="uid://tjybv3jei76w" path="res://hp.png" id="25_f5ryn"]
+[ext_resource type="Texture2D" uid="uid://nf376s7ohfyh" path="res://hp.png" id="25_f5ryn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w26cl"]
 animations = [{
@@ -291,9 +290,6 @@ tint_under = Color(0.10980392, 0.827451, 0.22745098, 1)
 tint_over = Color(0.9372549, 0.011764706, 0, 1)
 tint_progress = Color(1, 1, 0.48235294, 1)
 metadata/_edit_use_anchors_ = true
-
-[node name="Golem" parent="." instance=ExtResource("5_yw1ev")]
-position = Vector2(369, 205)
 
 [connection signal="health_changed" from="player" to="HUD" method="_on_player_health_changed"]
 [connection signal="body_entered" from="lava" to="lava" method="_on_body_entered"]
