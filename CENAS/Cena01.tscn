@@ -1,0 +1,300 @@
+[gd_scene load_steps=32 format=3 uid="uid://cpnc5prwxjdi5"]
+
+[ext_resource type="Texture2D" uid="uid://cp1joxyr3myf4" path="res://FinalBackground1.png" id="1_ajd5l"]
+[ext_resource type="Script" uid="uid://ifjkygv3heus" path="res://SCRIPTS/player.gd" id="1_jbf3o"]
+[ext_resource type="Texture2D" uid="uid://c2npn2gppwlxg" path="res://FinalBackground2.png" id="2_7wsrq"]
+[ext_resource type="Texture2D" uid="uid://dh4yldugnwwsd" path="res://CAVALEIRO/cavaleiro_idle_anda1.png" id="2_qdr6j"]
+[ext_resource type="Texture2D" uid="uid://lp7riopv1dpk" path="res://FinalBackground3.png" id="3_1vss3"]
+[ext_resource type="Texture2D" uid="uid://bu3qju1sga3vm" path="res://CAVALEIRO/cavaleiro_idle_anda2.png" id="4_2l2ij"]
+[ext_resource type="Texture2D" uid="uid://bkb3wwvn8ggiy" path="res://FinalBackground4.png" id="4_t8g44"]
+[ext_resource type="Texture2D" uid="uid://yf6pwljb1qo6" path="res://CAVALEIRO/cavaleiro_idle_anda3.png" id="5_jwcdh"]
+[ext_resource type="PackedScene" uid="uid://cjlpt50tq3w2i" path="res://CENAS/golem.tscn" id="5_yw1ev"]
+[ext_resource type="Texture2D" uid="uid://cvfdo7183o00k" path="res://CAVALEIRO/cavaleiro_idle_anda4.png" id="6_ajd5l"]
+[ext_resource type="Texture2D" uid="uid://qttb56ijgfcl" path="res://CAVALEIRO/cavaleiro_idle_anda5.png" id="7_7wsrq"]
+[ext_resource type="Texture2D" uid="uid://cjycnc4u6a55t" path="res://CAVALEIRO/cavaleiro_idle_anda6.png" id="8_1vss3"]
+[ext_resource type="Texture2D" uid="uid://cas8vph4qfhei" path="res://CAVALEIRO/cavaleiro_idle_anda7.png" id="9_t8g44"]
+[ext_resource type="Texture2D" uid="uid://oc0s5wjek33n" path="res://CAVALEIRO/cavaleiro_idle_anda8.png" id="10_w26cl"]
+[ext_resource type="Texture2D" uid="uid://dkbvto0e3ddwx" path="res://CAVALEIRO/cavaleiro_idle_anda9.png" id="11_y7evp"]
+[ext_resource type="Texture2D" uid="uid://li1qpc300dca" path="res://CAVALEIRO/cavaleiro_idle_anda18.png" id="12_8pwla"]
+[ext_resource type="Texture2D" uid="uid://b126nrkgt0oar" path="res://CAVALEIRO/cavaleiro_idle_anda19.png" id="13_r17o5"]
+[ext_resource type="Texture2D" uid="uid://dycaqte0jmnpw" path="res://CAVALEIRO/cavaleiro_idle_anda20.png" id="14_bf1lh"]
+[ext_resource type="Texture2D" uid="uid://d4a2k3fwdul2h" path="res://CAVALEIRO/cavaleiro_idle_anda21.png" id="15_egwq1"]
+[ext_resource type="Texture2D" uid="uid://c8vo6ooxvs5gj" path="res://CAVALEIRO/cavaleiro_idle_anda22.png" id="16_bwup2"]
+[ext_resource type="Texture2D" uid="uid://jxjxjjnf3oa3" path="res://CAVALEIRO/cavaleiro_idle_anda15.png" id="20_bmfvi"]
+[ext_resource type="Texture2D" uid="uid://cn3kldjwspd0a" path="res://CAVALEIRO/cavaleiro_idle_anda16.png" id="21_ae4qt"]
+[ext_resource type="Texture2D" uid="uid://y8edb0pdn3pi" path="res://CAVALEIRO/cavaleiro_idle_anda17.png" id="22_m130b"]
+[ext_resource type="Script" uid="uid://bktuudec1sq6r" path="res://SCRIPTS/lava.gd" id="23_jwcdh"]
+[ext_resource type="Script" uid="uid://dxh2ipl12e5r0" path="res://SCRIPTS/hud.gd" id="24_ajd5l"]
+[ext_resource type="Texture2D" uid="uid://tjybv3jei76w" path="res://hp.png" id="25_f5ryn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w26cl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ajd5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7wsrq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1vss3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_t8g44")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwcdh"]
+size = Vector2(48.75, 10)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ajd5l"]
+a = Vector2(-82, 3)
+b = Vector2(-79, -338)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cagsi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qdr6j")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qdr6j")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qdr6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2l2ij")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jwcdh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ajd5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7wsrq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_1vss3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_t8g44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_w26cl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_y7evp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_8pwla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_r17o5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_bf1lh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_egwq1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_bwup2")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_bmfvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ae4qt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_m130b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8pwla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_r17o5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_bf1lh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_egwq1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_bwup2")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5y10m"]
+size = Vector2(41.99999, 50.9375)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="camada01" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+
+[node name="chao" type="StaticBody2D" parent="."]
+position = Vector2(58, 412)
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="chao"]
+position = Vector2(3172, -139)
+sprite_frames = SubResource("SpriteFrames_w26cl")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.22193468
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="chao"]
+position = Vector2(1, 0)
+polygon = PackedVector2Array(-79, 6, 528, 1, 532, -89, 801, -90, 801, -6, 801, 3, 920, 4, 931, -36, 958, -43, 972, -37, 979, -30, 986, -33, 995, -38, 1000, -43, 1014, -45, 1029, -37, 1032, -26, 1038, -19, 1035, -11, 1032, 1, 1008, 3)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="chao"]
+polygon = PackedVector2Array(295, -13, 295, -13, 360, -11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chao"]
+position = Vector2(462, -56)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="chao"]
+position = Vector2(325, -9)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="chao"]
+position = Vector2(1061, -62)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="chao"]
+position = Vector2(1160, -66)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="chao"]
+position = Vector2(1254, -70)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="chao"]
+position = Vector2(1353, -60)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="chao"]
+position = Vector2(1596, -103)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="chao"]
+position = Vector2(1708, -71)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="chao"]
+position = Vector2(1849, -101)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="chao"]
+position = Vector2(1963, -79)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="chao"]
+position = Vector2(2105, -62)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="chao"]
+position = Vector2(2204, -37)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="chao"]
+position = Vector2(1464, -75)
+shape = SubResource("RectangleShape2D_jwcdh")
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="chao"]
+polygon = PackedVector2Array(-73, -354, 453, -344, 455, -238, 539, -233, 539, -151, 793, -143, 799, -232, 843, -232, 851, -338, 2371, -335, 2763, -328, 2744, -324, 2744, -264, 2887, -266, 2885, -180, 3325, -177, 3325, -257, 3409, -261, 3402, -428, -79, -427)
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="chao"]
+shape = SubResource("SegmentShape2D_ajd5l")
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="chao"]
+polygon = PackedVector2Array(2201, -15, 2221, -23, 2231, -14, 2236, -12, 2238, -9, 2252, -7, 2254, -16, 2264, -18, 2271, -24, 2282, -21, 2291, -18, 2291, -11, 2287, -2, 2293, 6, 2301, 2, 2522, 3, 2529, -10, 2540, -10, 2541, -24, 2553, -25, 2554, -36, 2566, -37, 2567, -48, 2579, -49, 2578, -60, 2590, -60, 2586, -80, 2657, -75, 2656, -88, 2671, -90, 2670, -100, 2682, -100, 2682, -110, 2693, -112, 2695, -126, 2768, -126, 3690, -123, 3694, -113, 3707, -114, 3706, -96, 3718, -96, 3722, -87, 3733, -88, 3735, -71, 3794, -77, 3803, -58, 3812, -58, 3813, -47, 3824, -44, 3824, -36, 3834, -34, 3836, -26, 3846, -25, 3851, -11, 3860, -10, 3860, 2, 4072, 2, 4076, 19, 4086, 19, 4085, 29, 4105, 30, 4104, 38, 4112, 38, 4112, 45, 4124, 46, 4125, 60, 4141, 58, 4143, 73, 4152, 72, 4152, 81, 4161, 81, 4165, 94, 4178, 94, 4177, 106, 4185, 106, 4184, 119, 4199, 119, 4200, 130, 4212, 130, 4214, 135, 4709, 134, 6400, 129, 6402, -431, 6418, 145, 2285, 145, 2256, 77, 2250, 47, 2243, 29, 2227, 22, 2210, 16, 2208, -7)
+
+[node name="player" type="CharacterBody2D" parent="." groups=["player"]]
+script = ExtResource("1_jbf3o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
+position = Vector2(72, 299)
+scale = Vector2(0.53125, 0.4609375)
+sprite_frames = SubResource("SpriteFrames_cagsi")
+animation = &"attack"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(70, 304)
+shape = SubResource("RectangleShape2D_5y10m")
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+position = Vector2(220, 267)
+zoom = Vector2(1.65, 1.65)
+limit_left = -15
+limit_top = -15
+limit_right = 6479
+limit_bottom = 551
+
+[node name="lava" type="Area2D" parent="."]
+position = Vector2(0, 3)
+script = ExtResource("23_jwcdh")
+damage_interval = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="lava"]
+polygon = PackedVector2Array(1099, 405, 1113, 401, 1127, 410, 1150, 409, 1155, 411, 1164, 407, 1179, 397, 1187, 397, 1194, 410, 1213, 405, 1217, 396, 1224, 393, 1228, 397, 1249, 407, 1253, 397, 1276, 392, 1290, 392, 1295, 401, 1305, 408, 1312, 403, 1324, 401, 1335, 394, 1340, 394, 1352, 394, 1355, 388, 1360, 388, 1363, 391, 1374, 402, 1383, 407, 1403, 407, 1406, 402, 1423, 402, 1433, 404, 1462, 403, 1451, 398, 1473, 402, 1481, 396, 1487, 394, 1492, 393, 1504, 397, 1520, 416, 1521, 397, 1528, 390, 1545, 391, 1554, 393, 1565, 401, 1576, 405, 1607, 391, 1610, 402, 1630, 390, 1641, 391, 1652, 401, 1670, 401, 1691, 402, 1701, 409, 1720, 409, 1725, 406, 1725, 407, 1749, 412, 1757, 404, 1767, 401, 1781, 407, 1783, 410, 1789, 388, 1829, 393, 1829, 402, 1829, 404, 1858, 401, 1870, 398, 1873, 398, 1892, 390, 1900, 390, 1908, 393, 1913, 401, 1926, 399, 1936, 398, 1963, 401, 1976, 401, 1989, 402, 1992, 390, 2000, 386, 2007, 393, 2034, 401, 2031, 407, 2044, 402, 2084, 401, 2092, 401, 2102, 404, 2114, 404, 2131, 401, 2135, 401, 2148, 407, 2150, 409, 2161, 409, 2166, 402, 2174, 401, 2190, 399, 2195, 399, 2209, 409, 2219, 412, 2234, 404, 2248, 402, 2289, 545, 1065, 536)
+
+[node name="DamageTimer" type="Timer" parent="lava"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("24_ajd5l")
+
+[node name="HealthBar" type="TextureProgressBar" parent="HUD"]
+custom_minimum_size = Vector2(20, 20)
+anchors_preset = -1
+anchor_right = 0.020833334
+anchor_bottom = 0.0055555557
+offset_left = 3.0
+offset_top = 10.0
+offset_right = 253.0
+offset_bottom = 40.0
+value = 100.0
+texture_under = ExtResource("25_f5ryn")
+tint_under = Color(0.10980392, 0.827451, 0.22745098, 1)
+tint_over = Color(0.9372549, 0.011764706, 0, 1)
+tint_progress = Color(1, 1, 0.48235294, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Golem" parent="." instance=ExtResource("5_yw1ev")]
+position = Vector2(369, 205)
+
+[connection signal="health_changed" from="player" to="HUD" method="_on_player_health_changed"]
+[connection signal="body_entered" from="lava" to="lava" method="_on_body_entered"]
+[connection signal="timeout" from="lava/DamageTimer" to="lava" method="_on_damage_timer_timeout"]
