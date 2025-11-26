@@ -288,15 +288,16 @@ autoplay = "walk"
 speed_scale = 0.5
 
 [node name="wall_detector" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(1, -26)
-scale = Vector2(1, 10)
 target_position = Vector2(23, 0)
+collision_mask = 2
 
 [node name="hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 script = ExtResource("7_jucw4")
 
 [node name="collision" type="CollisionShape2D" parent="hitbox"]
+visible = false
 position = Vector2(2, -24)
 shape = SubResource("RectangleShape2D_jucw4")

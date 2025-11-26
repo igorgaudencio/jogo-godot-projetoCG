@@ -1,32 +1,38 @@
 extends CharacterBody2D
 
 const SPEED = 50.0
-const JUMP_VELOCITY = -400.0
-const GRAVITY = 980.0  # ⬅️ ADICIONE GRAVIDADE CONSTANTE
+const GRAVITY = 980.0
 
 @onready var wall_detector := $wall_detector as RayCast2D
 @onready var texture := $texture as Sprite2D
 
 var direction := 1
+var can_detect := true  # ⬅️ CONTROLE DE PERMISSÃO
+var detection_cooldown := 0.5  # ⬅️ TEMPO DE ESPERA
 
 func _physics_process(delta: float) -> void:
-	# 🔹 GRAVIDADE
+	# Gravidade
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
 	
-	# 🔹 DETECÇÃO DE PAREDE
-	if wall_detector.is_colliding():
-		direction *= -1  # ⬅️ CORREÇÃO AQUI!
-		wall_detector.position.x *= -1  # Opcional: ajusta a posição do raycast
-		wall_detector.scale.x *= -1
+	# Inverte o raycast
+	wall_detector.scale.x = direction
 	
-	if direction == 1:
-		texture.flip_h = false
-	else:
-		texture.flip_h = true
+	# 🔍 DETECÇÃO COM COOLDOWN
+	if can_detect and wall_detector.is_colliding():
+		print("COLIDIU! Virando...")
+		direction *= -1
+		can_detect = false  # ⬅️ BLOQUEIA DETECÇÃO
+		start_cooldown()    # ⬅️ INICIA COOLDOWN
 	
-	# 🔹 MOVIMENTO HORIZONTAL (apenas no chão ou sempre?)
+	# Sprite
+	texture.flip_h = (direction == -1)
+	
+	# Movimento
 	velocity.x = direction * SPEED
-	
-	# 🔹 APLICA MOVIMENTO
 	move_and_slide()
+
+# ⏰ FUNÇÃO DO COOLDOWN
+func start_cooldown():
+	await get_tree().create_timer(detection_cooldown).timeout
+	can_detect = true  # ⬅️ LIBERA DETECÇÃO NOVAMENTE
