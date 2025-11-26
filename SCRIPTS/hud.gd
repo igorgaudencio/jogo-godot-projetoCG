@@ -19,6 +19,9 @@ func try_connect_to_player():
 			print("✅ HUD conectado ao player - Vida inicial: ", player.current_health)
 			# Atualiza com o valor atual do player
 			set_health(player.current_health)
+			
+			# Conecta também para o caso do player morrer e recarregar
+			player.tree_exiting.connect(_on_player_exiting)
 		else:
 			print("❌ Player não tem sinal health_changed")
 	else:
@@ -30,3 +33,17 @@ func try_connect_to_player():
 func set_health(value: int) -> void:
 	health_bar.value = value
 	print("🩹 HUD atualizado - Vida: ", value)
+	
+	# Efeito visual quando a vida está baixa
+	if value <= 30:
+		health_bar.modulate = Color.RED
+	elif value <= 50:
+		health_bar.modulate = Color.YELLOW
+	else:
+		health_bar.modulate = Color.WHITE
+
+func _on_player_exiting():
+	# Quando o player é removido (morte), tenta reconectar quando voltar
+	print("🔄 Player saiu da cena, aguardando reconexão...")
+	await get_tree().create_timer(0.1).timeout
+	try_connect_to_player()
