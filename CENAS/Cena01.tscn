@@ -161,6 +161,11 @@ position = Vector2(30, 319)
 position = Vector2(-324, 291)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(2, 2)
+limit_left = -513
+limit_top = -11
+limit_right = 6989
+limit_bottom = 564
 
 [connection signal="body_entered" from="lava" to="lava" method="_on_body_entered"]
 [connection signal="timeout" from="lava/DamageTimer" to="lava" method="_on_damage_timer_timeout"]
