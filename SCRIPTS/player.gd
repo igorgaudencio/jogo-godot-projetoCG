@@ -95,7 +95,7 @@ func die():
 	anim.play("hurt")
 	
 	# Espera um pouco antes de recarregar
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	get_tree().reload_current_scene()
 
 # ===============================
@@ -225,18 +225,3 @@ func attack():
 # ===============================
 # 🔹 DEBUG
 # ===============================
-
-func _input(event):
-	if event.is_action_pressed("debug_heal"):
-		heal(25)
-	elif event.is_action_pressed("debug_damage"):
-		take_damage(10)
-
-func heal(amount: int):
-	if is_dead:
-		return
-	
-	current_health += amount
-	current_health = clamp(current_health, 0, max_health)
-	print("✨ Vida recuperada: ", current_health)
-	emit_signal("health_changed", current_health)

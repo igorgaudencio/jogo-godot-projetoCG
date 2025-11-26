@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpnc5prwxjdi5"]
+[gd_scene load_steps=15 format=3 uid="uid://cpnc5prwxjdi5"]
 
 [ext_resource type="Texture2D" uid="uid://caewr0rqxmg4y" path="res://Cenario1.png" id="1_m41pe"]
 [ext_resource type="Texture2D" uid="uid://ceai1a3winei6" path="res://Cenario2.png" id="2_ugrku"]
@@ -35,11 +35,14 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwcdh"]
-size = Vector2(80.546875, 15.6875)
+size = Vector2(80.546875, 17.460938)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_m41pe"]
 a = Vector2(-577, 154)
 b = Vector2(-577, -426)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmkru"]
+size = Vector2(105.25, 20)
 
 [node name="Node2D" type="Node2D"]
 
@@ -62,14 +65,14 @@ frame_progress = 0.10744973
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="chao"]
 position = Vector2(-501, 6.0000076)
 scale = Vector2(1, 0.98828125)
-polygon = PackedVector2Array(-79, 8.694092, 533, 6.670349, 533, -90.46799, 805, -90.46799, 805, -5.471924, 805, 2.0237122, 934, 3.0355835, 935, -22.260864, 934, -42.498016, 958, -39.87509, 979, -30.768372, 986, -33, 995, -38, 1000, -43, 1014, -45, 1029, -37, 1032, -26, 1038, -19, 1035, -11, 987, 144.28302, -78, 150.35419)
+polygon = PackedVector2Array(-79, 8.694092, 533, 6.670349, 533, -90.46799, 805, -90.46799, 805, -5.471924, 805, 2.0237122, 934, 3.0355835, 935, -22.260864, 936, -44.52176, 958, -39.87509, 979, -30.768372, 986, -33, 995, -38, 1000, -43, 1014, -45, 1029, -37, 1032, -26, 1038, -19, 1035, -11, 987, 144.28302, -78, 150.35419)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="chao"]
-position = Vector2(-218.27344, -54)
+position = Vector2(-218, -54)
 shape = SubResource("RectangleShape2D_jwcdh")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="chao"]
-position = Vector2(-43, -84)
+position = Vector2(-46, -84)
 shape = SubResource("RectangleShape2D_jwcdh")
 
 [node name="CollisionShape2D15" type="CollisionShape2D" parent="chao"]
@@ -100,10 +103,6 @@ shape = SubResource("RectangleShape2D_jwcdh")
 position = Vector2(1933, -138)
 shape = SubResource("RectangleShape2D_jwcdh")
 
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="chao"]
-position = Vector2(1849, -101)
-shape = SubResource("RectangleShape2D_jwcdh")
-
 [node name="CollisionShape2D13" type="CollisionShape2D" parent="chao"]
 position = Vector2(2112, -180)
 shape = SubResource("RectangleShape2D_jwcdh")
@@ -123,6 +122,42 @@ polygon = PackedVector2Array(1693, -112, 1690, -124, 2113, -124, 2247, -124, 231
 [node name="CollisionShape2D11" type="CollisionShape2D" parent="chao"]
 shape = SubResource("SegmentShape2D_m41pe")
 
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="chao"]
+position = Vector2(1864, 6)
+shape = SubResource("RectangleShape2D_vmkru")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="chao"]
+position = Vector2(2108, -14)
+shape = SubResource("RectangleShape2D_vmkru")
+
+[node name="CollisionShape2D18" type="CollisionShape2D" parent="chao"]
+position = Vector2(2134, -31)
+shape = SubResource("RectangleShape2D_vmkru")
+
+[node name="CollisionShape2D19" type="CollisionShape2D" parent="chao"]
+position = Vector2(2152, -38)
+shape = SubResource("RectangleShape2D_vmkru")
+
+[node name="CollisionShape2D20" type="CollisionShape2D" parent="chao"]
+position = Vector2(2180, -47)
+shape = SubResource("RectangleShape2D_vmkru")
+
+[node name="CollisionShape2D21" type="CollisionShape2D" parent="chao"]
+position = Vector2(2194, -60)
+shape = SubResource("RectangleShape2D_vmkru")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="chao"]
+position = Vector2(1754, 7)
+shape = SubResource("RectangleShape2D_vmkru")
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="chao"]
+position = Vector2(1972, 6)
+shape = SubResource("RectangleShape2D_vmkru")
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="chao"]
+position = Vector2(2080, -1)
+shape = SubResource("RectangleShape2D_vmkru")
+
 [node name="lava" type="Area2D" parent="."]
 position = Vector2(0, 3)
 collision_layer = 2
@@ -131,22 +166,38 @@ script = ExtResource("23_jwcdh")
 damage_interval = 0.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="lava"]
+visible = false
 position = Vector2(-523, 19)
 polygon = PackedVector2Array(1099, 405, 1113, 401, 1127, 410, 1150, 409, 1155, 411, 1164, 407, 1179, 397, 1187, 397, 1194, 410, 1213, 405, 1217, 396, 1224, 393, 1228, 397, 1249, 407, 1253, 397, 1276, 392, 1290, 392, 1295, 401, 1305, 408, 1312, 403, 1324, 401, 1335, 394, 1340, 394, 1352, 394, 1355, 388, 1360, 388, 1363, 391, 1374, 402, 1383, 407, 1403, 407, 1406, 402, 1423, 402, 1433, 404, 1462, 403, 1451, 398, 1473, 402, 1481, 396, 1487, 394, 1492, 393, 1504, 397, 1520, 416, 1521, 397, 1528, 390, 1545, 391, 1554, 393, 1565, 401, 1576, 405, 1607, 391, 1610, 402, 1630, 390, 1641, 391, 1652, 401, 1670, 401, 1691, 402, 1701, 409, 1720, 409, 1725, 406, 1725, 407, 1749, 412, 1757, 404, 1767, 401, 1781, 407, 1783, 410, 1789, 388, 1829, 393, 1829, 402, 1829, 404, 1858, 401, 1870, 398, 1873, 398, 1892, 390, 1900, 390, 1908, 393, 1913, 401, 1926, 399, 1936, 398, 1963, 401, 1976, 401, 1989, 402, 1992, 390, 2000, 386, 2007, 393, 2030, 387, 2055, 375, 2069, 383, 2092, 387, 2105, 390, 2115, 386, 2120, 380, 2131, 391, 2139, 394, 2140, 376, 2156, 388, 2165, 387, 2174, 391, 2179, 393, 2190, 394, 2195, 388, 2205, 388, 2281, 363, 2593, 369, 2731, 298, 2735, 541, 1065, 536)
 
 [node name="DamageTimer" type="Timer" parent="lava"]
 
+[node name="Golem" parent="." instance=ExtResource("26_yw1ev")]
+position = Vector2(-84, 387)
+
+[node name="player" parent="." instance=ExtResource("10_vmkru")]
+position = Vector2(-324, 291)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(1.65, 1.65)
+limit_left = -520
+limit_top = -17
+limit_right = 6980
+limit_bottom = 563
+limit_smoothed = true
+
 [node name="HUD" type="CanvasLayer" parent="."]
+layer = 0
 script = ExtResource("24_ajd5l")
 
 [node name="HealthBar" type="TextureProgressBar" parent="HUD"]
 custom_minimum_size = Vector2(20, 20)
 anchors_preset = -1
 anchor_bottom = 0.011000001
-offset_left = -507.0
-offset_top = 125.0
-offset_right = -223.66666
-offset_bottom = 150.1
+offset_left = -517.0
+offset_top = 44.0
+offset_right = -233.66666
+offset_bottom = 69.1
 value = 100.0
 texture_under = ExtResource("25_f5ryn")
 tint_under = Color(0.10980392, 0.827451, 0.22745098, 1)
@@ -154,13 +205,8 @@ tint_over = Color(0.9372549, 0.011764706, 0, 1)
 tint_progress = Color(1, 1, 0.48235294, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Golem" parent="." instance=ExtResource("26_yw1ev")]
-position = Vector2(30, 319)
-
-[node name="player" parent="." instance=ExtResource("10_vmkru")]
-position = Vector2(-324, 291)
-
-[node name="Camera2D" type="Camera2D" parent="player"]
+[node name="Golem2" parent="." instance=ExtResource("26_yw1ev")]
+position = Vector2(3292, 339)
 
 [connection signal="body_entered" from="lava" to="lava" method="_on_body_entered"]
 [connection signal="timeout" from="lava/DamageTimer" to="lava" method="_on_damage_timer_timeout"]
