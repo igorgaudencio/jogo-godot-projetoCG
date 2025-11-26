@@ -6,8 +6,14 @@ extends CharacterBody2D
 @export var max_health: int = 100
 var current_health: int = max_health
 var is_dead: bool = false
-var just_took_damage: bool = false  # Nova flag para dano recente
-var damage_cooldown: float = 0.5    # Tempo que a animação de hurt fica
+var is_taking_damage: bool = false
+
+# ===============================
+# 🔹 SISTEMA DE ATAQUE (CORRIGIDO!)
+# ===============================
+@export var attack_damage: int = 20
+@onready var attack_area := $AttackArea as Area2D  # 🔥 CAUSA DANO
+@onready var hitbox := $hitbox as Area2D           # 🔥 RECEBE DANO 
 
 # Sinal emitido quando a vida muda (para atualizar o HUD)
 signal health_changed(value)
@@ -39,10 +45,10 @@ var dash_time_left: float = 0.0
 var is_dashing: bool = false
 
 # ===============================
-# 🔹 ATAQUE
+# 🔹 ATAQUE SIMPLES
 # ===============================
 var is_attacking: bool = false
-@export var attack_duration: float = 0.3
+var can_attack: bool = true
 
 # ===============================
 # 🔹 INICIALIZAÇÃO
@@ -52,50 +58,62 @@ func _ready() -> void:
 	add_to_group("player")
 	current_health = max_health
 	emit_signal("health_changed", current_health)
-	print("🎮 Player inicializado - Vida: ", current_health)
+	
+	# 🔥 CONECTAR SINAIS DAS ÁREAS (CORRIGIDO!)
+	if attack_area:
+		attack_area.body_entered.connect(_on_attack_area_body_entered)
+	if hitbox:
+		hitbox.area_entered.connect(_on_hitbox_area_entered)  # 🔥 CORRIGIDO!
+	
+	# 🔥 CONFIGURAR LAYERS (CORRIGIDO!)
+	setup_collision_layers()
+
+# 🔥 CONFIGURAR LAYERS (CORRIGIDA!)
+func setup_collision_layers():
+	# Corpo do Player
+	set_collision_layer_value(1, true)  # player
+	set_collision_mask_value(2, true)   # world
+	set_collision_mask_value(3, true)   # enemies
+	
+	# AttackArea (CAUSA dano)
+	if attack_area:
+		attack_area.set_collision_layer_value(5, true)  # hitbox layer
+		attack_area.set_collision_mask_value(6, true)   # hitbox mask (inimigos)
+		attack_area.add_to_group("player_attack")
+	
+	# Hitbox (RECEBE dano) - 🔥 CORRIGIDO!
+	if hitbox:
+		hitbox.set_collision_layer_value(6, true)      # hitbox layer  
+		hitbox.set_collision_mask_value(5, true)       # hitbox mask (inimigos)
 
 # ===============================
 # 🔹 DANO E MORTE
 # ===============================
 
 func take_damage(amount: int):
-	if is_dead:
+	if is_dead or is_taking_damage:
 		return
 
-	# Reduz a vida atual
 	current_health -= amount
 	current_health = clamp(current_health, 0, max_health)
-	print("❤️ Player tomou dano! Vida atual: ", current_health)
 	
-	# Ativa a flag de dano recente e toca animação
-	just_took_damage = true
+	is_taking_damage = true
 	anim.play("hurt")
 	
-	# Cria um timer para desativar a flag de dano
-	get_tree().create_timer(damage_cooldown).timeout.connect(_on_damage_cooldown_timeout)
+	await get_tree().create_timer(0.5).timeout
+	is_taking_damage = false
 	
-	# Emite sinal para atualizar o HUD
 	emit_signal("health_changed", current_health)
 
-	# Verifica se morreu
 	if current_health <= 0:
 		die()
-
-func _on_damage_cooldown_timeout():
-	just_took_damage = false
-	print("✅ Animação de dano terminou")
 
 func die():
 	is_dead = true
 	current_health = 0
 	emit_signal("health_changed", current_health)
-	print("💀 Player morreu!")
-	
-	# Toca animação de morte
 	anim.play("hurt")
-	
-	# Espera um pouco antes de recarregar
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(2.0).timeout
 	get_tree().reload_current_scene()
 
 # ===============================
@@ -107,6 +125,15 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 		move_and_slide()
 		return
+
+	# ==========================
+	# ATUALIZA TIMER DO DASH
+	# ==========================
+	if dash_timer > 0:
+		dash_timer -= delta
+	else:
+		click_count_left = 0
+		click_count_right = 0
 
 	# ==========================
 	# GRAVIDADE
@@ -135,24 +162,43 @@ func _physics_process(delta: float) -> void:
 	# ==========================
 	# PULO
 	# ==========================
-	if Input.is_action_just_pressed("ui_up") and is_on_floor():
+	if Input.is_action_just_pressed("ui_up") and is_on_floor() and not is_taking_damage:
 		velocity.y = jump_force
 
 	# ==========================
-	# ATAQUE
+	# ATAQUE SIMPLES
 	# ==========================
-	if Input.is_action_just_pressed("attack") and not is_attacking and not just_took_damage:
+	if Input.is_action_just_pressed("attack") and not is_attacking and not is_taking_damage and can_attack:
 		attack()
 
 	# ==========================
-	# ANIMAÇÕES (ORDEM DE PRIORIDADE)
+	# ANIMAÇÕES
 	# ==========================
-	# 1. Dano recente > 2. Ataque > 3. Dash > 4. Pulo > 5. Andar/Idle
-	if just_took_damage:
-		# Mantém a animação "hurt" até o cooldown acabar
-		if anim.animation != "hurt":
-			anim.play("hurt")
-	elif is_attacking:
+	update_animations()
+
+	# Espelhar sprite
+	if velocity.x != 0 and not is_taking_damage:
+		anim.flip_h = velocity.x < 0
+		
+		# 🔥 ATUALIZAR POSIÇÃO DA ÁREA DE ATAQUE
+		update_attack_area_position()
+
+	move_and_slide()
+
+# 🔥 ATUALIZAR POSIÇÃO DA ÁREA DE ATAQUE
+func update_attack_area_position():
+	if attack_area and is_instance_valid(attack_area):
+		if anim.flip_h:  # Virado para esquerda
+			attack_area.position = Vector2(-30, 0)
+		else:  # Virado para direita
+			attack_area.position = Vector2(30, 0)
+
+# Função separada para lidar com animações
+func update_animations():
+	if is_taking_damage:
+		return
+	
+	if is_attacking:
 		anim.play("attack")
 	elif is_dashing:
 		anim.play("dash")
@@ -163,18 +209,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		anim.play("run")
 
-	# Espelhar sprite
-	if velocity.x != 0 and not just_took_damage:
-		anim.flip_h = velocity.x < 0
-
-	move_and_slide()
-
 # ===============================
 # 🔹 DASH HANDLER
 # ===============================
 
 func _handle_dash_input(direction: int):
-	if just_took_damage:
+	if is_taking_damage:
 		return
 		
 	if direction == -1:
@@ -199,29 +239,51 @@ func _start_dash_timer(side: String):
 		_start_dash(1)
 		click_count_right = 0
 
-func _process(delta: float) -> void:
-	if dash_timer > 0:
-		dash_timer -= delta
-	else:
-		click_count_left = 0
-		click_count_right = 0
-
 func _start_dash(direction: int):
 	is_dashing = true
 	dash_direction = direction
 	dash_time_left = dash_duration
-	print("⚡ Dash ativado para direção:", direction)
 
 # ===============================
-# 🔹 ATAQUE
+# 🔹 ATAQUE SIMPLES
 # ===============================
 
 func attack():
 	is_attacking = true
-	print("👊 Ataque iniciado!")
-	await get_tree().create_timer(attack_duration).timeout
+	can_attack = false
+	print("⚔️ Player atacando!")
+	
+	anim.play("attack")
+	
+	# 🔥 ATIVAR ÁREA DE ATAQUE
+	if attack_area and is_instance_valid(attack_area):
+		attack_area.monitoring = true
+		print("✅ Player AttackArea ativada")
+	
+	# Espera a animação terminar
+	await get_tree().create_timer(0.3).timeout
+	
+	# 🔥 DESATIVAR ÁREA DE ATAQUE
+	if attack_area and is_instance_valid(attack_area):
+		attack_area.monitoring = false
+		print("❌ Player AttackArea desativada")
+	
 	is_attacking = false
+	
+	# Cooldown do ataque
+	await get_tree().create_timer(0.2).timeout
+	can_attack = true
 
-# ===============================
-# 🔹 DEBUG
-# ===============================
+# 🔥 SINAL DE ATAQUE ACERTOU INIMIGO
+func _on_attack_area_body_entered(body: Node2D):
+	if body.is_in_group("enemy") and body.has_method("take_damage") and not is_dead:
+		print("💢 Player causou ", attack_damage, " de dano ao inimigo!")
+		body.take_damage(attack_damage)
+
+# 🔥 SINAL DE RECEBER DANO (CORRIGIDO!)
+func _on_hitbox_area_entered(area: Area2D):  # 🔥 NOME CORRIGIDO!
+	if area.is_in_group("enemy_attack") and not is_dead:
+		var damage = 10  # Dano padrão
+		if area.has_method("get_damage"):
+			damage = area.get_damage()
+		take_damage(damage)
