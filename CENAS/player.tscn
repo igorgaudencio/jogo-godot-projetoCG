@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dv56ggwe06mpu"]
+[gd_scene load_steps=34 format=3 uid="uid://dv56ggwe06mpu"]
 
 [ext_resource type="Script" uid="uid://ifjkygv3heus" path="res://SCRIPTS/player.gd" id="1_s4lvb"]
 [ext_resource type="Texture2D" uid="uid://lcmj5jd52hgf" path="res://CAVALEIRO/cavaleiro_idle_anda (1)24.png" id="2_c5gwk"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://c7tf5tf8gatx2" path="res://CAVALEIRO/cavaleiro_idle_anda (1)12.png" id="27_getjb"]
 [ext_resource type="Texture2D" uid="uid://g6ak6slothna" path="res://CAVALEIRO/cavaleiro_idle_anda (1)13.png" id="28_oe2vk"]
 [ext_resource type="Texture2D" uid="uid://u05x0gx4bgb7" path="res://CAVALEIRO/cavaleiro_idle_anda (1)14.png" id="29_rhg1d"]
+[ext_resource type="AudioStream" uid="uid://dowv8mrq7t0c5" path="res://SONS/hit.wav" id="30_c5gwk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rqkdf"]
 animations = [{
@@ -161,7 +162,7 @@ script = ExtResource("1_s4lvb")
 position = Vector2(5, -4)
 scale = Vector2(0.53125, 0.4609375)
 sprite_frames = SubResource("SpriteFrames_rqkdf")
-animation = &"run"
+animation = &"attack"
 autoplay = "idle"
 speed_scale = 2.0
 
@@ -184,3 +185,6 @@ collision_mask = 20
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2(15, 2)
 shape = SubResource("CapsuleShape2D_s4lvb")
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("30_c5gwk")

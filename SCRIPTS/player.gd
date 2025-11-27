@@ -1,6 +1,12 @@
 extends CharacterBody2D
 
 # ===============================
+# 🔹 VARIÁVEIS DE SOM
+# ===============================
+@onready var hit = $hit as AudioStreamPlayer
+
+
+# ===============================
 # 🔹 VARIÁVEIS DE VIDA
 # ===============================
 @export var max_health: int = 100
@@ -152,7 +158,7 @@ func _physics_process(delta: float) -> void:
 			is_dashing = false
 	else:
 		var direction := Input.get_axis("ui_left", "ui_right")
-		velocity.x = direction * speed
+		velocity.x = direction * speed 
 
 		if Input.is_action_just_pressed("ui_left"):
 			_handle_dash_input(-1)
@@ -164,12 +170,14 @@ func _physics_process(delta: float) -> void:
 	# ==========================
 	if Input.is_action_just_pressed("ui_up") and is_on_floor() and not is_taking_damage:
 		velocity.y = jump_force
+		
 
 	# ==========================
 	# ATAQUE SIMPLES
 	# ==========================
 	if Input.is_action_just_pressed("attack") and not is_attacking and not is_taking_damage and can_attack:
 		attack()
+		hit.play()
 
 	# ==========================
 	# ANIMAÇÕES

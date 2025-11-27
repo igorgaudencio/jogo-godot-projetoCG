@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpnc5prwxjdi5"]
+[gd_scene load_steps=16 format=3 uid="uid://cpnc5prwxjdi5"]
 
 [ext_resource type="Texture2D" uid="uid://caewr0rqxmg4y" path="res://Cenario1.png" id="1_m41pe"]
 [ext_resource type="Texture2D" uid="uid://ceai1a3winei6" path="res://Cenario2.png" id="2_ugrku"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://c27gleq2xno1y" path="res://Cenario4.png" id="4_vss8g"]
 [ext_resource type="Texture2D" uid="uid://bh7kmdh4f5fe4" path="res://Cenario5.png" id="5_1geg4"]
 [ext_resource type="PackedScene" uid="uid://dv56ggwe06mpu" path="res://CENAS/player.tscn" id="10_vmkru"]
+[ext_resource type="AudioStream" uid="uid://cdu5jo0j2oiwl" path="res://SONS/sound.wav" id="11_wrfel"]
+[ext_resource type="PackedScene" uid="uid://drtjqbjq2rrop" path="res://CENAS/morcego.tscn" id="12_3e8h7"]
 [ext_resource type="Script" uid="uid://bktuudec1sq6r" path="res://SCRIPTS/lava.gd" id="23_jwcdh"]
 [ext_resource type="Script" uid="uid://dxh2ipl12e5r0" path="res://SCRIPTS/hud.gd" id="24_ajd5l"]
 [ext_resource type="Texture2D" uid="uid://nf376s7ohfyh" path="res://hp.png" id="25_f5ryn"]
@@ -160,8 +162,16 @@ tint_over = Color(0.9372549, 0.011764706, 0, 1)
 tint_progress = Color(1, 1, 0.48235294, 1)
 metadata/_edit_use_anchors_ = true
 
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_wrfel")
+volume_db = -10.0
+autoplay = true
+
 [node name="Golem" parent="." instance=ExtResource("26_yw1ev")]
-position = Vector2(3429, 364)
+position = Vector2(3413, 349)
+
+[node name="Morcego" parent="." instance=ExtResource("12_3e8h7")]
+position = Vector2(4, 258)
 
 [connection signal="body_entered" from="lava" to="lava" method="_on_body_entered"]
 [connection signal="timeout" from="lava/DamageTimer" to="lava" method="_on_damage_timer_timeout"]
