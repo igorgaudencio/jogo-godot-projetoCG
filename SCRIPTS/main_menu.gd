@@ -1,24 +1,20 @@
 extends Control
 
-func _ready():
-	# Conectar diretamente sem @onready (mais seguro para debugging)
-	$Panel/Jogar.pressed.connect(_on_play_pressed)
-	$Panel/Opções.pressed.connect(_on_options_pressed)
-	$Panel/Sair.pressed.connect(_on_quit_pressed)
-	
-	print("Menu inicializado!")
+@onready var start: Button = $MarginContainer/Menu_Buttons/Start
 
-func _on_play_pressed():
-	print("Tentando carregar Cena01...")
-	var resultado = get_tree().change_scene_to_file("res://CENAS/Cena01.tscn")
-	if resultado == OK:
-		print("Cena carregada com sucesso!")
-	else:
-		print("Erro ao carregar cena. Código: ", resultado)
+func _ready() -> void:
+	start.grab_focus()
 
-func _on_options_pressed():
-	print("Opções pressionado!")
+func _on_start_pressed() -> void:
 
-func _on_quit_pressed():
-	print("Saindo do jogo...")
+	get_tree().change_scene_to_file("res://CENAS/Cena01.tscn")
+
+
+func _on_load_pressed() -> void:
+	#TODO ver como carregar arquivos anteriores
+	pass
+
+
+func _on_quit_pressed() -> void:
+
 	get_tree().quit()

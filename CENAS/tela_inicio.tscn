@@ -1,0 +1,116 @@
+[gd_scene load_steps=11 format=3 uid="uid://c2rjneqbkham1"]
+
+[ext_resource type="Script" uid="uid://uxj5pfe7dp3h" path="res://CENAS/inicio.gd" id="1_0dw52"]
+[ext_resource type="Texture2D" uid="uid://bhfp4q0trj7kw" path="res://tela_inicio/tela inicio[1]1.png" id="1_wdwhn"]
+[ext_resource type="Texture2D" uid="uid://cyb6s8lk5rq5p" path="res://tela_inicio/tela inicio[1]2.png" id="2_0dw52"]
+[ext_resource type="Texture2D" uid="uid://dpiyfysbtil8k" path="res://tela_inicio/tela inicio[1]3.png" id="3_bcqew"]
+[ext_resource type="FontFile" uid="uid://oolk3yynfyb0" path="res://poco/Poco.ttf" id="3_pfi3c"]
+[ext_resource type="Texture2D" uid="uid://bft2xn2hk5ff" path="res://tela_inicio/tela inicio[1]4.png" id="4_ppd1k"]
+[ext_resource type="Texture2D" uid="uid://dpi67khg0r07m" path="res://tela_inicio/tela inicio[1]5.png" id="5_et4ml"]
+[ext_resource type="AudioStream" uid="uid://dk80x8gw6y01f" path="res://SONS/835204__bernhoftbret__warbling-25.wav" id="8_bcqew"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_88f4u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wdwhn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0dw52")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bcqew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ppd1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_et4ml")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="Theme" id="Theme_cut7r"]
+Button/font_sizes/font_size = 64
+Button/fonts/font = ExtResource("3_pfi3c")
+Button/icons/icon = null
+Button/styles/pressed = null
+
+[node name="Title_Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = -2.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0dw52")
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_bcqew")
+volume_db = -10.0
+autoplay = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = -181.0
+offset_top = -204.73491
+offset_right = 1683.0
+offset_bottom = 1129.2651
+button_mask = 0
+text = "
+
+
+
+
+                                                
+
+
+
+
+
+
+
+
+
+
+                                                          "
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(798, 450.25)
+scale = Vector2(1.5468748, 1.985491)
+sprite_frames = SubResource("SpriteFrames_88f4u")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.010000001
+anchor_top = 0.008
+anchor_right = 1.251
+anchor_bottom = 1.3280001
+offset_left = -226.98
+offset_top = -392.12
+offset_right = -286.09802
+offset_bottom = 17.079956
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0014727)
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 70
+
+[node name="Menu_Buttons" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, -5)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 0.0
+theme = SubResource("Theme_cut7r")
+theme_override_constants/separation = 42
+alignment = 1

@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://m1okjvifmffd"]
+
+[ext_resource type="Texture2D" uid="uid://brhvl2ylnl55j" path="res://MENU_PRINCIPAL/menuOfc[1]1.jpg" id="1_4x87a"]
+[ext_resource type="Script" uid="uid://l2hcf6rtt3ao" path="res://SCRIPTS/tela_inicio.gd" id="1_tg3ts"]
+[ext_resource type="AudioStream" uid="uid://dk80x8gw6y01f" path="res://SONS/835204__bernhoftbret__warbling-25.wav" id="2_s4nuu"]
+[ext_resource type="FontFile" uid="uid://oolk3yynfyb0" path="res://poco/Poco.ttf" id="3_i4e2m"]
+
+[sub_resource type="Theme" id="Theme_cut7r"]
+Button/font_sizes/font_size = 80
+Button/fonts/font = ExtResource("3_i4e2m")
+Button/icons/icon = null
+
+[node name="Title_Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tg3ts")
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_s4nuu")
+volume_db = -10.0
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06938521, 0.015799617, 0.045444347, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -525.0
+offset_top = -65.99999
+offset_right = 536.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0014727)
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 70
+
+[node name="GAME_LOGO" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("1_4x87a")
+
+[node name="Menu_Buttons" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, -5)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 0.0
+theme = SubResource("Theme_cut7r")
+theme_override_constants/separation = 42
+alignment = 1
+
+[node name="Start" type="Button" parent="MarginContainer/Menu_Buttons"]
+layout_mode = 2
+text = "JOGAR"
+
+[node name="Load" type="Button" parent="MarginContainer/Menu_Buttons"]
+layout_mode = 2
+text = "RANKING"
+
+[node name="Quit" type="Button" parent="MarginContainer/Menu_Buttons"]
+layout_mode = 2
+text = "SAIR"
+
+[connection signal="pressed" from="MarginContainer/Menu_Buttons/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/Menu_Buttons/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="MarginContainer/Menu_Buttons/Quit" to="." method="_on_quit_pressed"]

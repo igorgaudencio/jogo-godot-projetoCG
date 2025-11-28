@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cpnc5prwxjdi5"]
+[gd_scene load_steps=17 format=3 uid="uid://cpnc5prwxjdi5"]
 
 [ext_resource type="Texture2D" uid="uid://caewr0rqxmg4y" path="res://Cenario1.png" id="1_m41pe"]
 [ext_resource type="Texture2D" uid="uid://ceai1a3winei6" path="res://Cenario2.png" id="2_ugrku"]
@@ -12,6 +12,20 @@
 [ext_resource type="Script" uid="uid://dxh2ipl12e5r0" path="res://SCRIPTS/hud.gd" id="24_ajd5l"]
 [ext_resource type="Texture2D" uid="uid://nf376s7ohfyh" path="res://hp.png" id="25_f5ryn"]
 [ext_resource type="PackedScene" uid="uid://cjlpt50tq3w2i" path="res://CENAS/golem.tscn" id="26_yw1ev"]
+
+[sub_resource type="GDScript" id="GDScript_3e8h7"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w26cl"]
 animations = [{
@@ -44,6 +58,12 @@ a = Vector2(-577, 154)
 b = Vector2(-577, -426)
 
 [node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_3e8h7")
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_wrfel")
+volume_db = -10.0
+autoplay = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -144,6 +164,12 @@ limit_top = -11
 limit_right = 6989
 limit_bottom = 564
 
+[node name="Golem" parent="." instance=ExtResource("26_yw1ev")]
+position = Vector2(3413, 349)
+
+[node name="Morcego" parent="." instance=ExtResource("12_3e8h7")]
+position = Vector2(4, 258)
+
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("24_ajd5l")
 
@@ -161,17 +187,6 @@ tint_under = Color(0.10980392, 0.827451, 0.22745098, 1)
 tint_over = Color(0.9372549, 0.011764706, 0, 1)
 tint_progress = Color(1, 1, 0.48235294, 1)
 metadata/_edit_use_anchors_ = true
-
-[node name="sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_wrfel")
-volume_db = -10.0
-autoplay = true
-
-[node name="Golem" parent="." instance=ExtResource("26_yw1ev")]
-position = Vector2(3413, 349)
-
-[node name="Morcego" parent="." instance=ExtResource("12_3e8h7")]
-position = Vector2(4, 258)
 
 [connection signal="body_entered" from="lava" to="lava" method="_on_body_entered"]
 [connection signal="timeout" from="lava/DamageTimer" to="lava" method="_on_damage_timer_timeout"]

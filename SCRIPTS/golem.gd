@@ -174,10 +174,8 @@ func attack_behavior(_delta: float):
 		
 		# Toca animação de ataque
 		if animation_player and is_instance_valid(animation_player):
-			if animation_player.has_animation("hit"):
-				animation_player.play("hit")
-			elif animation_player.has_animation("hit"):
-				animation_player.play("hit")
+			animation_player.play("hit")
+			
 		
 		# Pequeno delay antes do ataque - COM VERIFICAÇÃO
 		await get_tree().create_timer(0.3).timeout
@@ -186,6 +184,7 @@ func attack_behavior(_delta: float):
 		
 		# Ativa a área de ataque
 		if attack_area and is_instance_valid(attack_area):
+			animation_player.play("hit")
 			attack_area.monitoring = true
 			print("✅ AttackArea ativada")
 		
