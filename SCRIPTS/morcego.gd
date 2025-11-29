@@ -9,9 +9,14 @@ enum State { PATROL, CHASE, HURT, DEAD }
 var current_state = State.PATROL
 
 # Variáveis de vida e estado
-var max_health := 3
-var current_health := 3
+var max_health := 40
+var current_health := 40
 var is_dead := false
+
+# Variáveis de knockback
+var knockback_velocity := Vector2.ZERO
+var is_knockback_active := false
+var knockback_decay := 0.9  # Quão rápido o knockback diminui
 
 var original_y := 0.0
 
@@ -28,6 +33,9 @@ var random_timer := 0.0
 var random_time := 1.5 + randf() * 3.0
 
 func _ready():
+	
+	add_to_group("enemy")
+	
 	detection_area.body_entered.connect(_on_detection_area_body_entered)
 	detection_area.body_exited.connect(_on_detection_area_body_exited)
 	hurtbox.body_entered.connect(_on_hurtbox_body_entered)  # Conecta o sinal de dano
@@ -47,26 +55,34 @@ func _physics_process(delta: float) -> void:
 		
 	wall_detector.target_position.x = 40 * direction
 	
-	# Máquina de estados
-	match current_state:
-		State.PATROL:
-			patrol_behavior(delta)
-		State.CHASE:
-			chase_behavior(delta)
-		State.HURT:
-			hurt_behavior(delta)
+	# Aplica knockback se estiver ativo
+	if is_knockback_active:
+		apply_knockback(delta)
+	else:
+		# Máquina de estados normal
+		match current_state:
+			State.PATROL:
+				patrol_behavior(delta)
+			State.CHASE:
+				chase_behavior(delta)
+			State.HURT:
+				hurt_behavior(delta)
 	
 	move_and_slide()
 	_handle_collisions()
 
-# ███  SISTEMA DE DANO  ███
-func take_damage(amount: int):
+# ███  SISTEMA DE DANO COM KNOCKBACK  ███
+func take_damage(amount: int, knockback_direction: Vector2 = Vector2.ZERO, knockback_force: float = 200.0):
 	if is_dead or current_state == State.DEAD or not is_instance_valid(self):
 		return
 	
 	current_health -= amount
 	current_health = max(0, current_health)
 	print("🦇 Morcego tomou ", amount, " de dano! Vida: ", current_health)
+	
+	# Aplica knockback
+	if knockback_direction != Vector2.ZERO:
+		apply_knockback_effect(knockback_direction, knockback_force)
 	
 	if current_health > 0:
 		current_state = State.HURT
@@ -79,6 +95,7 @@ func take_damage(amount: int):
 		await get_tree().create_timer(0.5).timeout
 		if is_dead or not is_instance_valid(self):
 			return
+		is_knockback_active = false
 		if player_ref and is_instance_valid(player_ref):
 			current_state = State.CHASE
 		else:
@@ -86,14 +103,35 @@ func take_damage(amount: int):
 	else:
 		die()
 
+# ███  SISTEMA DE KNOCKBACK  ███
+func apply_knockback_effect(knockback_direction: Vector2, force: float):
+	knockback_velocity = knockback_direction.normalized() * force
+	is_knockback_active = true
+	print("💥 Knockback aplicado: ", knockback_velocity)
+
+func apply_knockback(delta: float):
+	# Aplica a velocidade do knockback
+	velocity = knockback_velocity
+	
+	# Reduz gradualmente o knockback
+	knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, 0.1)
+	
+	# Verifica se o knockback terminou
+	if knockback_velocity.length() < 5.0:
+		is_knockback_active = false
+		knockback_velocity = Vector2.ZERO
+
 func hurt_behavior(_delta: float):
-	# Comportamento durante o estado de hurt
-	velocity.x = lerp(velocity.x, 0.0, 0.1)
-	velocity.y = lerp(velocity.y, 0.0, 0.1)
+	# Comportamento durante o estado de hurt (sem knockback ativo)
+	if not is_knockback_active:
+		velocity.x = lerp(velocity.x, 0.0, 0.1)
+		velocity.y = lerp(velocity.y, 0.0, 0.1)
 
 func die():
 	is_dead = true
 	current_state = State.DEAD
+	is_knockback_active = false
+	knockback_velocity = Vector2.ZERO
 	print("💀 Morcego morreu!")
 	
 	# Para completamente
@@ -139,16 +177,22 @@ func _on_hurtbox_body_entered(body: Node2D):
 	# Verifica se foi atingido por um ataque do player
 	if body.is_in_group("player_weapon") or body.is_in_group("player_attack"):
 		print("⚔️ Morcego atingido por ataque!")
-		take_damage(1)  # Reduzido para 1 de dano para equilibrar
+		
+		# Calcula direção do knockback (do player para o morcego)
+		var knockback_dir = (global_position - body.global_position).normalized()
+		take_damage(1, knockback_dir, 300.0)  # Força aumentada para 300
 	
 	# Ou se colidiu com o player (dano por contato)
 	elif body.is_in_group("player") and body.has_method("take_damage"):
 		print("👊 Dano por contato com player!")
-		take_damage(1)  # Reduzido para 1 de dano
+		
+		# Knockback para longe do player
+		var knockback_dir = (global_position - body.global_position).normalized()
+		take_damage(1, knockback_dir, 150.0)  # Força menor para contato
 
 # ███  COMPORTAMENTOS  ███
 func patrol_behavior(delta: float) -> void:
-	if is_dead or current_state != State.PATROL:
+	if is_dead or current_state != State.PATROL or is_knockback_active:
 		return
 		
 	global_position.y = lerp(global_position.y, original_y, delta * 2.0)
@@ -170,7 +214,7 @@ func patrol_behavior(delta: float) -> void:
 		animation_player.play("fly")
 
 func chase_behavior(delta: float) -> void:
-	if is_dead or current_state != State.CHASE or not is_instance_valid(player_ref):
+	if is_dead or current_state != State.CHASE or not is_instance_valid(player_ref) or is_knockback_active:
 		return
 
 	var dx = player_ref.global_position.x - global_position.x
@@ -207,7 +251,7 @@ func chase_behavior(delta: float) -> void:
 
 # ███  OUTRAS FUNÇÕES  ███
 func _handle_collisions():
-	if is_dead or current_state == State.DEAD:
+	if is_dead or current_state == State.DEAD or is_knockback_active:
 		return
 		
 	if get_slide_collision_count() > 0:

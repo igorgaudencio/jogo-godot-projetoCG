@@ -173,8 +173,7 @@ func attack_behavior(_delta: float):
 		print("💥 Golem atacando!")
 		
 		# Toca animação de ataque
-		if animation_player and is_instance_valid(animation_player):
-			animation_player.play("hit")
+		animation_player.play("hit")
 			
 		
 		# Pequeno delay antes do ataque - COM VERIFICAÇÃO

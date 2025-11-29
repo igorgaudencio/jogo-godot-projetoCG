@@ -262,14 +262,14 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jucw4"]
-size = Vector2(36.5, 16.875)
+size = Vector2(55, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2efie"]
 size = Vector2(226, 114)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jucw4"]
-radius = 13.0
-height = 32.0
+radius = 17.0
+height = 50.0
 
 [node name="Morcego" type="CharacterBody2D"]
 collision_layer = 4
@@ -303,10 +303,11 @@ collision_layer = 16
 script = ExtResource("7_qq3oe")
 
 [node name="collision" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(-2, -12.4375)
+position = Vector2(-2.5, -12)
 shape = SubResource("RectangleShape2D_jucw4")
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 monitorable = false
 
@@ -315,9 +316,10 @@ position = Vector2(-49, 3)
 shape = SubResource("RectangleShape2D_2efie")
 
 [node name="attack1" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 
 [node name="collision" type="CollisionShape2D" parent="attack1"]
-position = Vector2(-17, -2)
+position = Vector2(8, -8)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_jucw4")

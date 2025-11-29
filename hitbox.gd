@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var damage: int = 10  # Dano que a hitbox do golem causa
+@export var damage: int = 10  # Dano causado
 
 func _ready():
 	# Conecta o sinal quando o corpo entrar na área
