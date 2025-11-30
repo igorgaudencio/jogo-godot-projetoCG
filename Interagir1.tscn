@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://lejl3kpc2g5a"]
+
+[ext_resource type="Script" uid="uid://cp4psxhk2tafl" path="res://interagir_1.gd" id="1_yds3d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yds3d"]
+size = Vector2(24, 38)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 64
+script = ExtResource("1_yds3d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(12, 20)
+shape = SubResource("RectangleShape2D_yds3d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

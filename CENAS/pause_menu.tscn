@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqakom4df8ous"]
+
+[ext_resource type="Theme" uid="uid://dc8kchixks51c" path="res://themes/personalized-theme.tres" id="1_q5ypu"]
+[ext_resource type="Script" uid="uid://b0jfmpxjbx066" path="res://scripts/pause_menu.gd" id="1_tlsn2"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_tlsn2"]
+action = &"pause"
+
+[sub_resource type="InputEventAction" id="InputEventAction_5wnpb"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_5wnpb"]
+events = [SubResource("InputEventAction_tlsn2"), SubResource("InputEventAction_5wnpb")]
+
+[node name="Pause_Menu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_tlsn2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.36078432)
+
+[node name="Menu_Holder" type="VBoxContainer" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -49.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Resume" type="Button" parent="Menu_Holder"]
+layout_mode = 2
+theme = ExtResource("1_q5ypu")
+shortcut = SubResource("Shortcut_5wnpb")
+text = "Resumir"
+
+[node name="Restart" type="Button" parent="Menu_Holder"]
+layout_mode = 2
+theme = ExtResource("1_q5ypu")
+text = "Reiniciar"
+
+[node name="Quit" type="Button" parent="Menu_Holder"]
+layout_mode = 2
+theme = ExtResource("1_q5ypu")
+text = "Sair"
+
+[connection signal="pressed" from="Menu_Holder/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Menu_Holder/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Menu_Holder/Quit" to="." method="_on_quit_pressed"]

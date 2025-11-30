@@ -1,15 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://pupo6m6m05q2"]
+[gd_scene load_steps=14 format=3 uid="uid://cpnc5prwxjdi5"]
 
 [ext_resource type="AudioStream" uid="uid://cdu5jo0j2oiwl" path="res://SONS/sound.wav" id="1_uoy8y"]
-[ext_resource type="Texture2D" uid="uid://caewr0rqxmg4y" path="res://Cenario1.png" id="2_y0tw6"]
-[ext_resource type="Texture2D" uid="uid://ceai1a3winei6" path="res://Cenario2.png" id="3_4g28i"]
-[ext_resource type="Texture2D" uid="uid://ceewipp2jahd3" path="res://Cenario3.png" id="4_in4ea"]
-[ext_resource type="Texture2D" uid="uid://c27gleq2xno1y" path="res://Cenario4.png" id="5_ki76v"]
-[ext_resource type="Texture2D" uid="uid://bh7kmdh4f5fe4" path="res://Cenario5.png" id="6_crak6"]
-[ext_resource type="Script" uid="uid://bktuudec1sq6r" path="res://SCRIPTS/lava.gd" id="7_p2hnr"]
+[ext_resource type="Texture2D" uid="uid://b112uoyysxkme" path="res://CENARIOBOSS/FinalBossCenario1.jpg" id="2_2xt78"]
+[ext_resource type="Texture2D" uid="uid://0a2ek30d7pyc" path="res://CENARIOBOSS/FinalBossCenario2.jpg" id="3_yiks7"]
+[ext_resource type="Texture2D" uid="uid://2b7vi0s1bb8n" path="res://CENARIOBOSS/FinalBossCenario3.jpg" id="4_q6t08"]
+[ext_resource type="Texture2D" uid="uid://cag04f4qcwydi" path="res://CENARIOBOSS/FinalBossCenario4.jpg" id="5_amf4o"]
 [ext_resource type="PackedScene" uid="uid://dv56ggwe06mpu" path="res://CENAS/player.tscn" id="8_dg3oo"]
-[ext_resource type="PackedScene" uid="uid://cjlpt50tq3w2i" path="res://CENAS/golem.tscn" id="9_6wnf6"]
-[ext_resource type="PackedScene" uid="uid://drtjqbjq2rrop" path="res://CENAS/morcego.tscn" id="10_fplm6"]
+[ext_resource type="PackedScene" uid="uid://lejl3kpc2g5a" path="res://Interagir1.tscn" id="9_yiks7"]
 [ext_resource type="Script" uid="uid://dxh2ipl12e5r0" path="res://SCRIPTS/hud.gd" id="11_r1bum"]
 [ext_resource type="Texture2D" uid="uid://nf376s7ohfyh" path="res://hp.png" id="12_erkt2"]
 
@@ -31,31 +28,27 @@ func _process(delta: float) -> void:
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_y0tw6")
+"texture": ExtResource("2_2xt78")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_4g28i")
+"texture": ExtResource("3_yiks7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_in4ea")
+"texture": ExtResource("4_q6t08")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_ki76v")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_crak6")
+"texture": ExtResource("5_amf4o")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwcdh"]
-size = Vector2(80.546875, 15.6875)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3e8h7"]
+size = Vector2(1307, 78)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_m41pe"]
-a = Vector2(-577, 154)
-b = Vector2(-577, -426)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uuld3"]
+size = Vector2(404, 472)
 
 [node name="Node2D" type="Node2D"]
 script = SubResource("GDScript_3e8h7")
@@ -75,100 +68,37 @@ position = Vector2(58, 412)
 collision_layer = 2
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="chao"]
-position = Vector2(3172, -139)
+position = Vector2(-252, -133)
 sprite_frames = SubResource("SpriteFrames_w26cl")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.10744973
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="chao"]
-position = Vector2(-501, 6.0000076)
-scale = Vector2(1, 0.98828125)
-polygon = PackedVector2Array(-79, 8.694092, 533, 6.670349, 533, -90.46799, 805, -90.46799, 805, -5.471924, 805, 2.0237122, 934, 3.0355835, 935, -22.260864, 934, -42.498016, 958, -39.87509, 979, -30.768372, 986, -33, 995, -38, 1000, -43, 1014, -45, 1029, -37, 1032, -26, 1038, -19, 1035, -11, 987, 144.28302, -78, 150.35419)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="chao"]
-position = Vector2(-218.27344, -54)
-shape = SubResource("RectangleShape2D_jwcdh")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="chao"]
-position = Vector2(-43, -84)
-shape = SubResource("RectangleShape2D_jwcdh")
-
-[node name="CollisionShape2D15" type="CollisionShape2D" parent="chao"]
-position = Vector2(-364.54688, -16)
-shape = SubResource("RectangleShape2D_jwcdh")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="chao"]
-position = Vector2(591, -63)
-shape = SubResource("RectangleShape2D_jwcdh")
+position = Vector2(-240.5, 75)
+shape = SubResource("RectangleShape2D_3e8h7")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="chao"]
-position = Vector2(776, -106)
-shape = SubResource("RectangleShape2D_jwcdh")
+position = Vector2(-239, -250)
+shape = SubResource("RectangleShape2D_3e8h7")
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="chao"]
-position = Vector2(1249, -77)
-shape = SubResource("RectangleShape2D_jwcdh")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="chao"]
+position = Vector2(615, -199)
+shape = SubResource("RectangleShape2D_uuld3")
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="chao"]
-position = Vector2(978, -120)
-shape = SubResource("RectangleShape2D_jwcdh")
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="chao"]
-position = Vector2(1678, -177)
-shape = SubResource("RectangleShape2D_jwcdh")
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="chao"]
-position = Vector2(1933, -138)
-shape = SubResource("RectangleShape2D_jwcdh")
-
-[node name="CollisionShape2D13" type="CollisionShape2D" parent="chao"]
-position = Vector2(2112, -180)
-shape = SubResource("RectangleShape2D_jwcdh")
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="chao"]
-position = Vector2(1452, -174)
-shape = SubResource("RectangleShape2D_jwcdh")
-
-[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="chao"]
-position = Vector2(-504, 9)
-polygon = PackedVector2Array(-73, -354, 453, -344, 455, -238, 539, -233, 539, -151, 808, -146, 810, -227, 856, -229, 858, -334, 2749, -332, 2748, -267, 2886, -262, 2887, -184, 3330, -187, 3333, -265, 3417, -269, 3415, -400, 3992, -397, 4047, -436, -79, -427)
-
-[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="chao"]
-position = Vector2(508, 3)
-polygon = PackedVector2Array(1676, -98, 1676, -112, 1689, -112, 1690, -125, 2317, -124, 2351, -123, 2375, -124, 2392, -125, 2415, -124, 2444, -125, 2485, -124, 2517, -124, 2529, -124, 2548, -124, 2547, -4, 3036, -4, 3037, -87, 3025, -88, 3025, -94, 3037, -94, 3037, -130, 3694, -124, 3694, -113, 3707, -114, 3708, -98, 3719, -97, 3719, -86, 3735, -86, 3736, -74, 3798, -74, 3799, -60, 3811, -60, 3813, -47, 3824, -44, 3824, -36, 3834, -34, 3836, -26, 3846, -25, 3851, -11, 3860, -10, 3860, 2, 4072, 2, 4076, 19, 4086, 19, 4085, 29, 4105, 30, 4104, 38, 4112, 38, 4112, 45, 4124, 46, 4125, 60, 4141, 58, 4143, 73, 4152, 72, 4152, 81, 4161, 81, 4165, 94, 4178, 94, 4177, 106, 4185, 106, 4184, 119, 4199, 119, 4200, 130, 4212, 130, 4214, 135, 4709, 134, 6400, 129, 6402, -431, 6418, 145, 2285, 145, -12, 146, 1, 70, 1530, 22, 1652, -86, 1663, -86, 1663, -98)
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="chao"]
-shape = SubResource("SegmentShape2D_m41pe")
-
-[node name="lava" type="Area2D" parent="."]
-position = Vector2(0, 3)
-collision_layer = 2
-collision_mask = 53
-script = ExtResource("7_p2hnr")
-damage_interval = 0.0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="lava"]
-position = Vector2(-523, 19)
-polygon = PackedVector2Array(1099, 405, 1113, 401, 1127, 410, 1150, 409, 1155, 411, 1164, 407, 1179, 397, 1187, 397, 1194, 410, 1213, 405, 1217, 396, 1224, 393, 1228, 397, 1249, 407, 1253, 397, 1276, 392, 1290, 392, 1295, 401, 1305, 408, 1312, 403, 1324, 401, 1335, 394, 1340, 394, 1352, 394, 1355, 388, 1360, 388, 1363, 391, 1374, 402, 1383, 407, 1403, 407, 1406, 402, 1423, 402, 1433, 404, 1462, 403, 1451, 398, 1473, 402, 1481, 396, 1487, 394, 1492, 393, 1504, 397, 1520, 416, 1521, 397, 1528, 390, 1545, 391, 1554, 393, 1565, 401, 1576, 405, 1607, 391, 1610, 402, 1630, 390, 1641, 391, 1652, 401, 1670, 401, 1691, 402, 1701, 409, 1720, 409, 1725, 406, 1725, 407, 1749, 412, 1757, 404, 1767, 401, 1781, 407, 1783, 410, 1789, 388, 1829, 393, 1829, 402, 1829, 404, 1858, 401, 1870, 398, 1873, 398, 1892, 390, 1900, 390, 1908, 393, 1913, 401, 1926, 399, 1936, 398, 1963, 401, 1976, 401, 1989, 402, 1992, 390, 2000, 386, 2007, 393, 2030, 387, 2055, 375, 2069, 383, 2092, 387, 2105, 390, 2115, 386, 2120, 380, 2131, 391, 2139, 394, 2140, 376, 2156, 388, 2165, 387, 2174, 391, 2179, 393, 2190, 394, 2195, 388, 2205, 388, 2281, 363, 2593, 369, 2736, 295, 2735, 541, 1065, 536)
-
-[node name="DamageTimer" type="Timer" parent="lava"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="chao"]
+position = Vector2(-1090, -198)
+shape = SubResource("RectangleShape2D_uuld3")
 
 [node name="player" parent="." instance=ExtResource("8_dg3oo")]
 position = Vector2(-324, 291)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(2, 2)
-limit_left = -513
-limit_top = -11
-limit_right = 6989
+limit_left = -1245
+limit_top = -29
+limit_right = 891
 limit_bottom = 564
-
-[node name="Golem" parent="." instance=ExtResource("9_6wnf6")]
-position = Vector2(3413, 349)
-
-[node name="Morcego" parent="." instance=ExtResource("10_fplm6")]
-position = Vector2(4, 258)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("11_r1bum")
@@ -177,9 +107,9 @@ script = ExtResource("11_r1bum")
 custom_minimum_size = Vector2(20, 20)
 anchors_preset = -1
 anchor_bottom = 0.011000001
-offset_left = -507.0
+offset_left = -522.0
 offset_top = 125.0
-offset_right = -223.66666
+offset_right = -238.66666
 offset_bottom = 150.1
 value = 100.0
 texture_under = ExtResource("12_erkt2")
@@ -188,11 +118,5 @@ tint_over = Color(0.9372549, 0.011764706, 0, 1)
 tint_progress = Color(1, 1, 0.48235294, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Golem2" parent="." instance=ExtResource("9_6wnf6")]
-position = Vector2(5222, 487)
-
-[node name="Golem3" parent="." instance=ExtResource("9_6wnf6")]
-position = Vector2(6231, 417)
-
-[connection signal="body_entered" from="lava" to="lava" method="_on_body_entered"]
-[connection signal="timeout" from="lava/DamageTimer" to="lava" method="_on_damage_timer_timeout"]
+[node name="Area2D" parent="HUD" instance=ExtResource("9_yiks7")]
+position = Vector2(-238, 393)

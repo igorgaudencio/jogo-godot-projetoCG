@@ -5,7 +5,6 @@ extends CharacterBody2D
 # ===============================
 @onready var hit = $hit as AudioStreamPlayer
 
-
 # ===============================
 # 🔹 VARIÁVEIS DE VIDA
 # ===============================
@@ -15,13 +14,13 @@ var is_dead: bool = false
 var is_taking_damage: bool = false
 
 # ===============================
-# 🔹 SISTEMA DE ATAQUE (CORRIGIDO!)
+# 🔹 SISTEMA DE ATAQUE
 # ===============================
 @export var attack_damage: int = 20
-@onready var attack_area := $AttackArea as Area2D  # 🔥 CAUSA DANO
-@onready var hitbox := $hitbox as Area2D           # 🔥 RECEBE DANO 
+@onready var attack_area := $AttackArea as Area2D
+@onready var hitbox := $hitbox as Area2D
 
-# Sinal emitido quando a vida muda (para atualizar o HUD)
+# Sinal emitido quando a vida muda
 signal health_changed(value)
 
 # ===============================
@@ -31,7 +30,7 @@ signal health_changed(value)
 @export var jump_force: float = -460.0
 @export var gravity: float = 900.0
 
-# Referência ao AnimatedSprite2D para controlar animações
+# Referência ao AnimatedSprite2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 # ===============================
@@ -57,6 +56,11 @@ var is_attacking: bool = false
 var can_attack: bool = true
 
 # ===============================
+# 🔹 INTERAÇÃO COM PORTAS
+# ===============================
+var pode_entrar: bool = false
+
+# ===============================
 # 🔹 INICIALIZAÇÃO
 # ===============================
 
@@ -65,32 +69,26 @@ func _ready() -> void:
 	current_health = max_health
 	emit_signal("health_changed", current_health)
 	
-	# 🔥 CONECTAR SINAIS DAS ÁREAS (CORRIGIDO!)
 	if attack_area:
 		attack_area.body_entered.connect(_on_attack_area_body_entered)
 	if hitbox:
-		hitbox.area_entered.connect(_on_hitbox_area_entered)  # 🔥 CORRIGIDO!
+		hitbox.area_entered.connect(_on_hitbox_area_entered)
 	
-	# 🔥 CONFIGURAR LAYERS (CORRIGIDO!)
 	setup_collision_layers()
 
-# 🔥 CONFIGURAR LAYERS (CORRIGIDA!)
 func setup_collision_layers():
-	# Corpo do Player
-	set_collision_layer_value(1, true)  # player
-	set_collision_mask_value(2, true)   # world
-	set_collision_mask_value(3, true)   # enemies
+	set_collision_layer_value(1, true)
+	set_collision_mask_value(2, true)
+	set_collision_mask_value(3, true)
 	
-	# AttackArea (CAUSA dano)
 	if attack_area:
-		attack_area.set_collision_layer_value(5, true)  # hitbox layer
-		attack_area.set_collision_mask_value(6, true)   # hitbox mask (inimigos)
+		attack_area.set_collision_layer_value(5, true)
+		attack_area.set_collision_mask_value(6, true)
 		attack_area.add_to_group("player_attack")
 	
-	# Hitbox (RECEBE dano) - 🔥 CORRIGIDO!
 	if hitbox:
-		hitbox.set_collision_layer_value(6, true)      # hitbox layer  
-		hitbox.set_collision_mask_value(5, true)       # hitbox mask (inimigos)
+		hitbox.set_collision_layer_value(6, true)
+		hitbox.set_collision_mask_value(5, true)
 
 # ===============================
 # 🔹 DANO E MORTE
@@ -170,7 +168,6 @@ func _physics_process(delta: float) -> void:
 	# ==========================
 	if Input.is_action_just_pressed("ui_up") and is_on_floor() and not is_taking_damage:
 		velocity.y = jump_force
-		
 
 	# ==========================
 	# ATAQUE SIMPLES
@@ -184,24 +181,34 @@ func _physics_process(delta: float) -> void:
 	# ==========================
 	update_animations()
 
-	# Espelhar sprite
 	if velocity.x != 0 and not is_taking_damage:
 		anim.flip_h = velocity.x < 0
-		
-		# 🔥 ATUALIZAR POSIÇÃO DA ÁREA DE ATAQUE
 		update_attack_area_position()
 
 	move_and_slide()
 
-# 🔥 ATUALIZAR POSIÇÃO DA ÁREA DE ATAQUE
+# ===============================
+# 🔹 TROCA DE CENA COM UI_INTERACT
+# ===============================
+func _input(event):
+	if event.is_action_pressed("ui_interact") and pode_entrar:
+		get_tree().change_scene_to_file("res://CENAS/Cena02.tscn")
+		print("Trocando para Cena02")
+
+# ===============================
+# 🔹 FUNÇÕES DE INTERAÇÃO
+# ===============================
+func set_pode_entrar(valor: bool):
+	pode_entrar = valor
+	print("Pode entrar: ", valor)
+
 func update_attack_area_position():
 	if attack_area and is_instance_valid(attack_area):
-		if anim.flip_h:  # Virado para esquerda
+		if anim.flip_h:
 			attack_area.position = Vector2(-30, 0)
-		else:  # Virado para direita
+		else:
 			attack_area.position = Vector2(30, 0)
 
-# Função separada para lidar com animações
 func update_animations():
 	if is_taking_damage:
 		return
@@ -263,35 +270,27 @@ func attack():
 	
 	anim.play("attack")
 	
-	# 🔥 ATIVAR ÁREA DE ATAQUE
 	if attack_area and is_instance_valid(attack_area):
 		attack_area.monitoring = true
-		print("✅ Player AttackArea ativada")
 	
-	# Espera a animação terminar
 	await get_tree().create_timer(0.3).timeout
 	
-	# 🔥 DESATIVAR ÁREA DE ATAQUE
 	if attack_area and is_instance_valid(attack_area):
 		attack_area.monitoring = false
-		print("❌ Player AttackArea desativada")
 	
 	is_attacking = false
 	
-	# Cooldown do ataque
 	await get_tree().create_timer(0.2).timeout
 	can_attack = true
 
-# 🔥 SINAL DE ATAQUE ACERTOU INIMIGO
 func _on_attack_area_body_entered(body: Node2D):
 	if body.is_in_group("enemy") and body.has_method("take_damage") and not is_dead:
 		print("💢 Player causou ", attack_damage, " de dano ao inimigo!")
 		body.take_damage(attack_damage)
 
-# 🔥 SINAL DE RECEBER DANO (CORRIGIDO!)
-func _on_hitbox_area_entered(area: Area2D):  # 🔥 NOME CORRIGIDO!
+func _on_hitbox_area_entered(area: Area2D):
 	if area.is_in_group("enemy_attack") and not is_dead:
-		var damage = 10  # Dano padrão
+		var damage = 10
 		if area.has_method("get_damage"):
 			damage = area.get_damage()
 		take_damage(damage)
