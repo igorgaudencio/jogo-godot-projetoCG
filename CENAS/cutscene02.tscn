@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ky3sfyxayqwn"]
 
 [ext_resource type="Script" uid="uid://c3ytpqxmokmtw" path="res://SCRIPTS/cutscene_02.gd" id="1_5ksrj"]
-[ext_resource type="AudioStream" uid="uid://dk80x8gw6y01f" path="res://SONS/835204__bernhoftbret__warbling-25.wav" id="2_grv7u"]
+[ext_resource type="AudioStream" uid="uid://ba7ibqeyalbho" path="res://SONS/Carabiner  Music _ Menu - Tela Inicial.mp3" id="2_5ksrj"]
 [ext_resource type="Texture2D" uid="uid://ds0gvn3andamh" path="res://Cutscene/Cutscene2.png" id="3_grv7u"]
 [ext_resource type="FontFile" uid="uid://oolk3yynfyb0" path="res://poco/Poco.ttf" id="4_k8yjt"]
 
@@ -35,7 +35,7 @@ grow_vertical = 2
 script = ExtResource("1_5ksrj")
 
 [node name="sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_grv7u")
+stream = ExtResource("2_5ksrj")
 volume_db = -11.107
 autoplay = true
 

@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://uxj5pfe7dp3h" path="res://SCRIPTS/inicio.gd" id="1_0dw52"]
 [ext_resource type="Texture2D" uid="uid://bhfp4q0trj7kw" path="res://tela_inicio/tela inicio[1]1.png" id="1_wdwhn"]
 [ext_resource type="Texture2D" uid="uid://cyb6s8lk5rq5p" path="res://tela_inicio/tela inicio[1]2.png" id="2_0dw52"]
+[ext_resource type="AudioStream" uid="uid://ba7ibqeyalbho" path="res://SONS/Carabiner  Music _ Menu - Tela Inicial.mp3" id="2_bcqew"]
 [ext_resource type="Texture2D" uid="uid://dpiyfysbtil8k" path="res://tela_inicio/tela inicio[1]3.png" id="3_bcqew"]
 [ext_resource type="FontFile" uid="uid://oolk3yynfyb0" path="res://poco/Poco.ttf" id="3_pfi3c"]
 [ext_resource type="Texture2D" uid="uid://bft2xn2hk5ff" path="res://tela_inicio/tela inicio[1]4.png" id="4_ppd1k"]
 [ext_resource type="Texture2D" uid="uid://dpi67khg0r07m" path="res://tela_inicio/tela inicio[1]5.png" id="5_et4ml"]
-[ext_resource type="AudioStream" uid="uid://dk80x8gw6y01f" path="res://SONS/835204__bernhoftbret__warbling-25.wav" id="8_bcqew"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_88f4u"]
 animations = [{
@@ -51,7 +51,7 @@ grow_vertical = 2
 script = ExtResource("1_0dw52")
 
 [node name="sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_bcqew")
+stream = ExtResource("2_bcqew")
 volume_db = -10.0
 autoplay = true
 
