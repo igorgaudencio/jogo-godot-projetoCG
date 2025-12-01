@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cpnc5prwxjdi5"]
+[gd_scene load_steps=16 format=3 uid="uid://cpnc5prwxjdi5"]
 
 [ext_resource type="AudioStream" uid="uid://cdu5jo0j2oiwl" path="res://SONS/sound.wav" id="1_uoy8y"]
 [ext_resource type="Texture2D" uid="uid://b112uoyysxkme" path="res://CENARIOBOSS/FinalBossCenario1.jpg" id="2_2xt78"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dv56ggwe06mpu" path="res://CENAS/player.tscn" id="8_dg3oo"]
 [ext_resource type="PackedScene" uid="uid://lejl3kpc2g5a" path="res://Interagir1.tscn" id="9_yiks7"]
 [ext_resource type="PackedScene" uid="uid://d1onbx0yed8fc" path="res://CENAS/enemy_fly.tscn" id="10_q6t08"]
+[ext_resource type="PackedScene" uid="uid://dsf5ayuxy2tke" path="res://CENAS/simple_pause_menu.tscn" id="11_amf4o"]
 [ext_resource type="Script" uid="uid://dxh2ipl12e5r0" path="res://SCRIPTS/hud.gd" id="11_r1bum"]
 [ext_resource type="Texture2D" uid="uid://nf376s7ohfyh" path="res://hp.png" id="12_erkt2"]
 
@@ -16,11 +17,7 @@ script/source = "# game_scene.gd
 extends Node2D
 
 func _ready():
-	# 🎯 Instanciar e adicionar o menu de pausa
-	var pause_menu = preload(\"res://CENAS/simple_pause_menu.tscn\").instantiate()
-	add_child(pause_menu)
-	
-	print(\"✅ Menu de pausa carregado\")
+	pass
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w26cl"]
@@ -123,3 +120,5 @@ position = Vector2(-238, 393)
 
 [node name="EnemyFly" parent="." instance=ExtResource("10_q6t08")]
 position = Vector2(-191, 428)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("11_amf4o")]

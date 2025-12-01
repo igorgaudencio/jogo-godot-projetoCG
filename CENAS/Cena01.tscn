@@ -205,9 +205,6 @@ collision_layer = 2
 position = Vector2(-484, 379)
 collision_layer = 2
 
-[node name="Golem4" parent="." instance=ExtResource("26_yw1ev")]
-position = Vector2(-135, 320)
-
 [node name="CanvasLayer" parent="." instance=ExtResource("14_bt5x0")]
 visible = false
 
