@@ -1,15 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://b8ummtw83wkkm"]
 
-[ext_resource type="Script" uid="uid://c3ytpqxmokmtw" path="res://SCRIPTS/cutscene_02.gd" id="1_ek32i"]
+[ext_resource type="Script" uid="uid://ducr2xl3esvlk" path="res://CENAS/creditos.gd" id="1_ek32i"]
 [ext_resource type="AudioStream" uid="uid://dk80x8gw6y01f" path="res://SONS/835204__bernhoftbret__warbling-25.wav" id="2_1ss1e"]
-[ext_resource type="Texture2D" uid="uid://ds0gvn3andamh" path="res://Cutscene/Cutscene2.png" id="3_x6xpe"]
+[ext_resource type="Texture2D" uid="uid://dv28w1vp211pc" path="res://tela_inicio/CREDITOS EDVAN LEITE IGOR GAUDENCIO MEDEIROS.png" id="3_ek32i"]
 [ext_resource type="FontFile" uid="uid://oolk3yynfyb0" path="res://poco/Poco.ttf" id="4_b5rkw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_88f4u"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_x6xpe")
+"texture": ExtResource("3_ek32i")
 }],
 "loop": true,
 "name": &"new_animation",
@@ -71,46 +71,7 @@ sprite_frames = SubResource("SpriteFrames_88f4u")
 animation = &"new_animation"
 autoplay = "new_animation"
 
-[node name="TextEdit" type="TextEdit" parent="."]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 16.0
-offset_right = 800.0
-offset_bottom = 335.0
-theme_override_colors/caret_background_color = Color(1, 1, 1, 1)
-theme_override_colors/background_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("4_b5rkw")
-theme_override_font_sizes/font_size = 24
-text = "Fuksho atravessa o portão do castelo e encontra um ambiente sombrio,
- frio e silencioso. O interior é tomado por névoas escuras e símbolos 
-que brilham fracamente nas paredes, revelando um lugar que parece 
-estar vivo e observá-lo a cada passo.
-Entre as sombras, surge a figura de sua irmã, a imagem que sempre
- o motivou a continuar. Porém, a ilusão rapidamente se distorce e
- revela sua verdadeira forma: o Shinigami, manipulando o corpo
- dela para abalar a determinação do espadachim.
-"
-
-[node name="TextEdit2" type="TextEdit" parent="."]
-layout_mode = 0
-offset_left = 1054.0
-offset_top = 518.0
-offset_right = 1589.0
-offset_bottom = 793.0
-theme_override_colors/caret_background_color = Color(1, 1, 1, 1)
-theme_override_colors/background_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("4_b5rkw")
-theme_override_font_sizes/font_size = 24
-text = "
-No centro do salão principal, a criatura aguarda,
- transformando o reencontro em um duelo
- inevitável. Agora, Fuksho precisa encarar
- seu maior medo, enfrentar a forma da 
-pessoa que tentou salvar, sabendo que
- qualquer hesitação pode custar sua alma."
-
 [node name="MarginContainer" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.010000001
