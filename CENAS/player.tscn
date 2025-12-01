@@ -30,7 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://g6ak6slothna" path="res://CAVALEIRO/cavaleiro_idle_anda (1)13.png" id="28_oe2vk"]
 [ext_resource type="Texture2D" uid="uid://u05x0gx4bgb7" path="res://CAVALEIRO/cavaleiro_idle_anda (1)14.png" id="29_rhg1d"]
 [ext_resource type="AudioStream" uid="uid://dowv8mrq7t0c5" path="res://SONS/hit.wav" id="30_c5gwk"]
-[ext_resource type="Script" uid="uid://cpisf5g8qvcsn" path="res://CENAS/attack_area.gd" id="30_unrvs"]
+[ext_resource type="Script" uid="uid://cpisf5g8qvcsn" path="res://SCRIPTS/attack_area.gd" id="30_unrvs"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rqkdf"]
 animations = [{
@@ -178,7 +178,6 @@ collision_layer = 16
 collision_mask = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_s4lvb")
 debug_color = Color(0.86774224, 0, 0.1199146, 0.41960785)

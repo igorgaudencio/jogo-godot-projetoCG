@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv28w1vp211pc"
-path="res://.godot/imported/CREDITOS EDVAN LEITE IGOR GAUDENCIO MEDEIROS.png-ea2e42a3b695198506b9336b1182ceb1.ctex"
+uid="uid://da021jbnhbcam"
+path="res://.godot/imported/CREDITOS EDVAN LEITE IGOR GAUDENCIO MEDEIROS.png-e06cbe7ddf0e445f792766683550d39c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tela_inicio/CREDITOS EDVAN LEITE IGOR GAUDENCIO MEDEIROS.png"
-dest_files=["res://.godot/imported/CREDITOS EDVAN LEITE IGOR GAUDENCIO MEDEIROS.png-ea2e42a3b695198506b9336b1182ceb1.ctex"]
+source_file="res://CENAS/CREDITOS EDVAN LEITE IGOR GAUDENCIO MEDEIROS.png"
+dest_files=["res://.godot/imported/CREDITOS EDVAN LEITE IGOR GAUDENCIO MEDEIROS.png-e06cbe7ddf0e445f792766683550d39c.ctex"]
 
 [params]
 

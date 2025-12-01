@@ -12,17 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://nf376s7ohfyh" path="res://hp.png" id="12_erkt2"]
 
 [sub_resource type="GDScript" id="GDScript_3e8h7"]
-script/source = "extends Node2D
+script/source = "# game_scene.gd
+extends Node2D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _ready():
+	# 🎯 Instanciar e adicionar o menu de pausa
+	var pause_menu = preload(\"res://CENAS/simple_pause_menu.tscn\").instantiate()
+	add_child(pause_menu)
+	
+	print(\"✅ Menu de pausa carregado\")
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w26cl"]
@@ -124,5 +122,4 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(-238, 393)
 
 [node name="EnemyFly" parent="." instance=ExtResource("10_q6t08")]
-visible = true
 position = Vector2(-191, 428)

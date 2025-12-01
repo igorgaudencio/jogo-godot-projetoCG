@@ -1,15 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8ummtw83wkkm"]
+[gd_scene load_steps=7 format=3 uid="uid://dti6u74jy4iui"]
 
-[ext_resource type="Script" uid="uid://ducr2xl3esvlk" path="res://SCRIPTS/creditos.gd" id="1_ek32i"]
-[ext_resource type="AudioStream" uid="uid://dk80x8gw6y01f" path="res://SONS/835204__bernhoftbret__warbling-25.wav" id="2_1ss1e"]
-[ext_resource type="Texture2D" uid="uid://dv28w1vp211pc" path="res://tela_inicio/CREDITOS EDVAN LEITE IGOR GAUDENCIO MEDEIROS.png" id="3_ek32i"]
-[ext_resource type="FontFile" uid="uid://oolk3yynfyb0" path="res://poco/Poco.ttf" id="4_b5rkw"]
+[ext_resource type="Script" uid="uid://dwhcfsy2c8lf8" path="res://SCRIPTS/game_over.gd" id="1_s6p3m"]
+[ext_resource type="AudioStream" uid="uid://dk80x8gw6y01f" path="res://SONS/835204__bernhoftbret__warbling-25.wav" id="2_s6p3m"]
+[ext_resource type="Texture2D" uid="uid://cuhsfxyne32f4" path="res://GameOver.png" id="4_encvw"]
+[ext_resource type="FontFile" uid="uid://oolk3yynfyb0" path="res://poco/Poco.ttf" id="4_teqso"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_88f4u"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ek32i")
+"texture": ExtResource("4_encvw")
 }],
 "loop": true,
 "name": &"new_animation",
@@ -18,7 +18,7 @@ animations = [{
 
 [sub_resource type="Theme" id="Theme_cut7r"]
 Button/font_sizes/font_size = 64
-Button/fonts/font = ExtResource("4_b5rkw")
+Button/fonts/font = ExtResource("4_teqso")
 Button/icons/icon = null
 Button/styles/pressed = null
 
@@ -32,10 +32,10 @@ offset_right = -2.0
 offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ek32i")
+script = ExtResource("1_s6p3m")
 
 [node name="sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_1ss1e")
+stream = ExtResource("2_s6p3m")
 volume_db = -11.107
 autoplay = true
 
@@ -65,13 +65,14 @@ text = "
                                                           "
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(798, 446.5)
-scale = Vector2(1.5566407, 1.2911209)
+position = Vector2(804.00006, 448)
+scale = Vector2(1.0403645, 0.87109375)
 sprite_frames = SubResource("SpriteFrames_88f4u")
 animation = &"new_animation"
 autoplay = "new_animation"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.010000001

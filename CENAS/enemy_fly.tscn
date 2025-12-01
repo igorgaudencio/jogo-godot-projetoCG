@@ -92,10 +92,10 @@ debug_color = Color(0.70298797, 0, 0.10701548, 0.41960785)
 position = Vector2(150, -108)
 
 [node name="Marker2D4" type="Marker2D" parent="AttackSpawnPoints"]
-position = Vector2(-193, -129)
+position = Vector2(-151, -152)
 
 [node name="Marker2D6" type="Marker2D" parent="AttackSpawnPoints"]
-position = Vector2(-89, -109)
+position = Vector2(-103, -93)
 
 [node name="Marker2D7" type="Marker2D" parent="AttackSpawnPoints"]
 position = Vector2(-27, -109)
@@ -107,7 +107,7 @@ position = Vector2(0, -109)
 position = Vector2(32, -109)
 
 [node name="Marker2D10" type="Marker2D" parent="AttackSpawnPoints"]
-position = Vector2(88, -109)
+position = Vector2(100, -147)
 
 [connection signal="timeout" from="BulletHellTimer" to="." method="_on_bullet_hell_timer_timeout"]
 [connection signal="timeout" from="HurtSpriteTimer" to="." method="_on_hurt_sprite_timer_timeout"]

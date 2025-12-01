@@ -264,11 +264,11 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jucw4"]
-radius = 38.0
-height = 86.0
+radius = 27.0
+height = 76.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jucw4"]
-size = Vector2(76, 73)
+size = Vector2(73, 73)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2efie"]
 size = Vector2(369, 172)
@@ -299,8 +299,7 @@ speed_scale = 0.5
 collision_layer = 16
 
 [node name="collision" type="CollisionShape2D" parent="attack1"]
-position = Vector2(-6, -38)
-rotation = -1.5707964
+position = Vector2(-10, -36)
 shape = SubResource("CapsuleShape2D_jucw4")
 
 [node name="wall_detector" type="RayCast2D" parent="."]
@@ -310,12 +309,11 @@ target_position = Vector2(44, 1)
 collision_mask = 2
 
 [node name="hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 16
 script = ExtResource("7_jucw4")
 
 [node name="collision" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(-4, -37.5)
+position = Vector2(-5.5, -37.5)
 shape = SubResource("RectangleShape2D_jucw4")
 
 [node name="DetectionArea" type="Area2D" parent="."]

@@ -12,7 +12,7 @@ extends CharacterBody2D
 # ===============================
 @export var bullet_scene: PackedScene
 @export var bullet_speed: float = 200.0
-@export var min_attack_interval: float = 0.5  # Tempo mínimo entre ataques
+@export var min_attack_interval: float = 0.2  # Tempo mínimo entre ataques
 @export var max_attack_interval: float = 3.0  # Tempo máximo entre ataques
 
 # ===============================

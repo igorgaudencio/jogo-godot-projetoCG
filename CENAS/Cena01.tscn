@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://pupo6m6m05q2"]
+[gd_scene load_steps=19 format=3 uid="uid://pupo6m6m05q2"]
 
 [ext_resource type="Texture2D" uid="uid://caewr0rqxmg4y" path="res://Cenario1.png" id="1_m41pe"]
 [ext_resource type="Texture2D" uid="uid://ceai1a3winei6" path="res://Cenario2.png" id="2_ugrku"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cdu5jo0j2oiwl" path="res://SONS/sound.wav" id="11_wrfel"]
 [ext_resource type="PackedScene" uid="uid://drtjqbjq2rrop" path="res://CENAS/morcego.tscn" id="12_3e8h7"]
 [ext_resource type="PackedScene" uid="uid://lejl3kpc2g5a" path="res://Interagir1.tscn" id="13_uuld3"]
+[ext_resource type="PackedScene" uid="uid://dsf5ayuxy2tke" path="res://CENAS/simple_pause_menu.tscn" id="14_bt5x0"]
 [ext_resource type="Script" uid="uid://bktuudec1sq6r" path="res://SCRIPTS/lava.gd" id="23_jwcdh"]
 [ext_resource type="Script" uid="uid://dxh2ipl12e5r0" path="res://SCRIPTS/hud.gd" id="24_ajd5l"]
 [ext_resource type="Texture2D" uid="uid://nf376s7ohfyh" path="res://hp.png" id="25_f5ryn"]
@@ -206,6 +207,9 @@ collision_layer = 2
 
 [node name="Golem4" parent="." instance=ExtResource("26_yw1ev")]
 position = Vector2(-135, 320)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("14_bt5x0")]
+visible = false
 
 [connection signal="body_entered" from="lava" to="lava" method="_on_body_entered"]
 [connection signal="timeout" from="lava/DamageTimer" to="lava" method="_on_damage_timer_timeout"]

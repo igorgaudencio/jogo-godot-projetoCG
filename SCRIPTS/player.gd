@@ -137,7 +137,7 @@ func die():
 	emit_signal("health_changed", current_health)
 	anim.play("hurt")
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://CENAS/title_screen.tscn")
+	get_tree().change_scene_to_file("res://CENAS/game_over.tscn")
 
 # ===============================
 # 🔹 PROCESSAMENTO PRINCIPAL
