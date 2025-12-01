@@ -14,11 +14,15 @@ var is_dead: bool = false
 var is_taking_damage: bool = false
 
 # ===============================
-# 🔹 SISTEMA DE ATAQUE
+# 🔹 SISTEMA DE ATAQUE - REVISADO
 # ===============================
 @export var attack_damage: int = 20
 @onready var attack_area := $AttackArea as Area2D
 @onready var hitbox := $hitbox as Area2D
+
+# 🔥 NOVO: Controle mais rigoroso de ataque
+var attack_cooldown_timer: float = 0.0
+var attack_active: bool = false
 
 # Sinal emitido quando a vida muda
 signal health_changed(value)
@@ -50,7 +54,7 @@ var dash_time_left: float = 0.0
 var is_dashing: bool = false
 
 # ===============================
-# 🔹 ATAQUE SIMPLES
+# 🔹 ATAQUE SIMPLES - REVISADO
 # ===============================
 var is_attacking: bool = false
 var can_attack: bool = true
@@ -69,12 +73,27 @@ func _ready() -> void:
 	current_health = max_health
 	emit_signal("health_changed", current_health)
 	
-	if attack_area:
-		attack_area.body_entered.connect(_on_attack_area_body_entered)
+	# 🔥 CORREÇÃO COMPLETA: Configurar áreas corretamente
+	setup_attack_area()
+	
 	if hitbox:
 		hitbox.area_entered.connect(_on_hitbox_area_entered)
 	
 	setup_collision_layers()
+	print("✅ Player inicializado - AttackArea desativada")
+
+# 🔥 FUNÇÃO ESPECÍFICA PARA CONFIGURAR A ÁREA DE ATAQUE
+func setup_attack_area():
+	if attack_area:
+		# 🔥 DESATIVAR COMPLETAMENTE
+		attack_area.monitoring = false
+		attack_area.monitorable = false
+		attack_area.set_deferred("monitoring", false)
+		attack_area.set_deferred("monitorable", false)
+		
+		# 🔥 CONECTAR SINAL APENAS UMA VEZ
+		if not attack_area.body_entered.is_connected(_on_attack_area_body_entered):
+			attack_area.body_entered.connect(_on_attack_area_body_entered)
 
 func setup_collision_layers():
 	set_collision_layer_value(1, true)
@@ -170,7 +189,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_force
 
 	# ==========================
-	# ATAQUE SIMPLES
+	# ATAQUE SIMPLES - REVISADO
 	# ==========================
 	if Input.is_action_just_pressed("attack") and not is_attacking and not is_taking_damage and can_attack:
 		attack()
@@ -192,7 +211,7 @@ func _physics_process(delta: float) -> void:
 # ===============================
 func _input(event):
 	if event.is_action_pressed("ui_interact") and pode_entrar:
-		get_tree().change_scene_to_file("res://CENAS/Cena02.tscn")
+		get_tree().change_scene_to_file("res://CENAS/cutscene02.tscn")
 		print("Trocando para Cena02")
 
 # ===============================
@@ -205,9 +224,9 @@ func set_pode_entrar(valor: bool):
 func update_attack_area_position():
 	if attack_area and is_instance_valid(attack_area):
 		if anim.flip_h:
-			attack_area.position = Vector2(-30, 0)
+			attack_area.position = Vector2(-15, 0)
 		else:
-			attack_area.position = Vector2(30, 0)
+			attack_area.position = Vector2(15, 0)
 
 func update_animations():
 	if is_taking_damage:
@@ -260,33 +279,59 @@ func _start_dash(direction: int):
 	dash_time_left = dash_duration
 
 # ===============================
-# 🔹 ATAQUE SIMPLES
+# 🔹 ATAQUE SIMPLES - SISTEMA REVISADO
 # ===============================
 
 func attack():
 	is_attacking = true
 	can_attack = false
+	attack_active = true
+	
 	print("⚔️ Player atacando!")
 	
 	anim.play("attack")
 	
-	if attack_area and is_instance_valid(attack_area):
+	# 🔥 ATIVAR ÁREA DE ATAQUE COM SEGURANÇA
+	await get_tree().create_timer(0.3).timeout  # Pequeno delay antes do dano
+	
+	if attack_area and is_instance_valid(attack_area) and not is_dead:
+		# 🔥 ATIVAR MONITORING E MONITORABLE
 		attack_area.monitoring = true
+		attack_area.monitorable = true
+		print("✅ AttackArea ATIVADA - Pode causar dano")
 	
-	await get_tree().create_timer(0.3).timeout
+	# Manter área ativa por um curto período
+	await get_tree().create_timer(0.15).timeout
 	
+	# 🔥 DESATIVAR COMPLETAMENTE APÓS O ATAQUE
 	if attack_area and is_instance_valid(attack_area):
 		attack_area.monitoring = false
+		attack_area.monitorable = false
+		attack_active = false
+		print("❌ AttackArea DESATIVADA - Não causa mais dano")
 	
+	# Finalizar ataque
 	is_attacking = false
 	
+	# Cooldown do ataque
 	await get_tree().create_timer(0.2).timeout
 	can_attack = true
 
 func _on_attack_area_body_entered(body: Node2D):
+	# 🔥 VERIFICAÇÃO EXTRA DE SEGURANÇA
+	if not attack_active:
+		print("🚫 AttackArea detectou colisão mas está INATIVA - Ignorando")
+		return
+		
 	if body.is_in_group("enemy") and body.has_method("take_damage") and not is_dead:
 		print("💢 Player causou ", attack_damage, " de dano ao inimigo!")
 		body.take_damage(attack_damage)
+		
+		# 🔥 OPIONAL: Desativar após acertar um inimigo
+		attack_active = false
+		if attack_area and is_instance_valid(attack_area):
+			attack_area.monitoring = false
+			attack_area.monitorable = false
 
 func _on_hitbox_area_entered(area: Area2D):
 	if area.is_in_group("enemy_attack") and not is_dead:
@@ -294,3 +339,5 @@ func _on_hitbox_area_entered(area: Area2D):
 		if area.has_method("get_damage"):
 			damage = area.get_damage()
 		take_damage(damage)
+		
+		

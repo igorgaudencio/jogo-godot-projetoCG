@@ -1,0 +1,130 @@
+[gd_scene load_steps=7 format=3 uid="uid://drdq27iwvysmj"]
+
+[ext_resource type="Script" uid="uid://ckfnm1c1hlnoa" path="res://SCRIPTS/cutscene_01.gd" id="1_5ksrj"]
+[ext_resource type="AudioStream" uid="uid://dk80x8gw6y01f" path="res://SONS/835204__bernhoftbret__warbling-25.wav" id="2_grv7u"]
+[ext_resource type="Texture2D" uid="uid://dnxp5clgrqgvd" path="res://Cutscene/Cutscene01.png" id="3_v83rf"]
+[ext_resource type="FontFile" uid="uid://oolk3yynfyb0" path="res://poco/Poco.ttf" id="4_k8yjt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_88f4u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_v83rf")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="Theme" id="Theme_cut7r"]
+Button/font_sizes/font_size = 64
+Button/fonts/font = ExtResource("4_k8yjt")
+Button/icons/icon = null
+Button/styles/pressed = null
+
+[node name="Title_Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = -2.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5ksrj")
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_grv7u")
+volume_db = -10.0
+autoplay = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = -181.0
+offset_top = -204.73491
+offset_right = 1683.0
+offset_bottom = 1129.2651
+button_mask = 0
+text = "
+
+
+
+
+                                                
+
+
+
+
+
+
+
+
+
+
+                                                          "
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(795.49994, 451.50003)
+scale = Vector2(1.0292968, 0.8759767)
+sprite_frames = SubResource("SpriteFrames_88f4u")
+animation = &"new_animation"
+autoplay = "new_animation"
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 4.0
+offset_right = 1586.0
+offset_bottom = 878.0
+text = "Fuksho jamais aceitou a morte da irmã.
+Em sua dor, aceitou um pacto proibido com um Shinigami… mas foi enganado.
+
+Agora, condenado ao Mundo Inferior, ele caminha pelos Sete Infernos enquanto 
+sua alma se desfaz lentamente. Cada domínio é guardado por monstros colossais, 
+reflexos distorcidos da própria humanidade que ele tenta proteger. O tempo é seu 
+inimigo: quanto mais avança, mais sua essência se fragmenta.
+
+A jornada apresentada nesta demo se inicia no 5º Inferno.
+Fuksho desperta diante de um mar de lava, cercado por criaturas infernais e
+ ruínas consumidas pelo fogo. Entre plataformas instáveis e batalhas 
+desesperadas, ele deve enfrentar o Golem Colossal, a personificação brutal de seu 
+ódio e descontrole.
+
+Sobrevivendo ao guardião, uma passagem se abre rumo ao 7º Inferno:
+uma floresta morta que conduz às ruínas do castelo do Shinigami.
+Ali, a tortura final toma forma…
+O próprio manipulador do pacto se apresenta usando o corpo da irmã de Fuksho,
+uma afronta cruel que busca destruir sua última esperança.
+
+Esta é apenas a primeira luz no abismo.
+Quanto mais fundo Fuksho descer, mais dolorosa será a verdade que encontrará.
+E quando o pacto se completar… talvez já não reste alma para ser salva."
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.010000001
+anchor_top = 0.008
+anchor_right = 1.251
+anchor_bottom = 1.3280001
+offset_left = -226.98
+offset_top = -392.12
+offset_right = -286.09802
+offset_bottom = 17.079956
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0014727)
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 70
+
+[node name="Menu_Buttons" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, -5)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 0.0
+theme = SubResource("Theme_cut7r")
+theme_override_constants/separation = 42
+alignment = 1

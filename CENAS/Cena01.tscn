@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	get_tree().change_scene_to_file(\"res://CENAS/Cena02.tscn\")
+	get_tree().change_scene_to_file(\"res://CENAS/cutscene02.tscn\")
 "
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w26cl"]
@@ -200,6 +200,11 @@ position = Vector2(6231, 417)
 position = Vector2(6761, 501)
 collision_layer = 2
 
+[node name="Area2D2" parent="." instance=ExtResource("13_uuld3")]
+position = Vector2(-484, 379)
+collision_layer = 2
+
 [connection signal="body_entered" from="lava" to="lava" method="_on_body_entered"]
 [connection signal="timeout" from="lava/DamageTimer" to="lava" method="_on_damage_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_body_entered"]

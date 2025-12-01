@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://d1onbx0yed8fc"]
+
+[ext_resource type="Script" uid="uid://dr6fw0fameatm" path="res://SCRIPTS/enemy_fly.gd" id="1_o72el"]
+[ext_resource type="Texture2D" uid="uid://dsx6bgsue36nn" path="res://SHINIGAMI/Shinigami_idle (1)1.png" id="2_ajp3k"]
+[ext_resource type="Texture2D" uid="uid://8pm80qvf1xqe" path="res://SHINIGAMI/Shinigami_idle (1)5.png" id="2_feekj"]
+[ext_resource type="Texture2D" uid="uid://beaanbmoaysac" path="res://SHINIGAMI/Shinigami_idle (1)2.png" id="3_feekj"]
+[ext_resource type="Texture2D" uid="uid://gscnqwwmd8so" path="res://SHINIGAMI/Shinigami_idle (1)6.png" id="3_ogap4"]
+[ext_resource type="Texture2D" uid="uid://d4fj02w6ttw6l" path="res://SHINIGAMI/Shinigami_idle (1)3.png" id="4_ogap4"]
+[ext_resource type="Texture2D" uid="uid://bleexn0li4rh0" path="res://SHINIGAMI/Shinigami_idle (1)4.png" id="5_3uax4"]
+[ext_resource type="Texture2D" uid="uid://bvbyg7mkluw57" path="res://SHINIGAMI/hurt.png" id="6_ff3ql"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qqhq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_feekj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ogap4")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ff3ql")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ajp3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_feekj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ogap4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3uax4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fg7hh"]
+radius = 5.914055
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mhise"]
+radius = 10.657677
+
+[node name="EnemyFly" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_o72el")
+speed = null
+change_direction_time = null
+bounce_jitter = null
+bullet_speed = null
+attack_cooldown = null
+max_health = null
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5.999998, -38)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_0qqhq")
+animation = &"attack"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -37)
+scale = Vector2(6.1082935, 6.1082935)
+shape = SubResource("CircleShape2D_fg7hh")
+
+[node name="BulletHellTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="HurtSpriteTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.9999995, -35.000004)
+scale = Vector2(5.254428, 5.254428)
+shape = SubResource("CircleShape2D_mhise")
+debug_color = Color(0.70298797, 0, 0.10701548, 0.41960785)
+
+[node name="AttackSpawnPoints" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="AttackSpawnPoints"]
+position = Vector2(-64, -128)
+
+[node name="Marker2D2" type="Marker2D" parent="AttackSpawnPoints"]
+position = Vector2(64, -128)
+
+[node name="Marker2D3" type="Marker2D" parent="AttackSpawnPoints"]
+position = Vector2(192, -128)
+
+[node name="Marker2D4" type="Marker2D" parent="AttackSpawnPoints"]
+position = Vector2(-192, -128)
+
+[connection signal="timeout" from="BulletHellTimer" to="." method="_on_bullet_hell_timer_timeout"]
+[connection signal="timeout" from="HurtSpriteTimer" to="." method="_on_hurt_sprite_timer_timeout"]

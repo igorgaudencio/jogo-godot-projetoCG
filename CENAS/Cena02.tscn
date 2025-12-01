@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cpnc5prwxjdi5"]
+[gd_scene load_steps=15 format=3 uid="uid://cpnc5prwxjdi5"]
 
 [ext_resource type="AudioStream" uid="uid://cdu5jo0j2oiwl" path="res://SONS/sound.wav" id="1_uoy8y"]
 [ext_resource type="Texture2D" uid="uid://b112uoyysxkme" path="res://CENARIOBOSS/FinalBossCenario1.jpg" id="2_2xt78"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cag04f4qcwydi" path="res://CENARIOBOSS/FinalBossCenario4.jpg" id="5_amf4o"]
 [ext_resource type="PackedScene" uid="uid://dv56ggwe06mpu" path="res://CENAS/player.tscn" id="8_dg3oo"]
 [ext_resource type="PackedScene" uid="uid://lejl3kpc2g5a" path="res://Interagir1.tscn" id="9_yiks7"]
+[ext_resource type="PackedScene" uid="uid://d1onbx0yed8fc" path="res://CENAS/enemy_fly.tscn" id="10_q6t08"]
 [ext_resource type="Script" uid="uid://dxh2ipl12e5r0" path="res://SCRIPTS/hud.gd" id="11_r1bum"]
 [ext_resource type="Texture2D" uid="uid://nf376s7ohfyh" path="res://hp.png" id="12_erkt2"]
 
@@ -59,6 +60,7 @@ volume_db = -10.0
 autoplay = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
 
 [node name="camada01" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0.5)
@@ -83,22 +85,22 @@ position = Vector2(-239, -250)
 shape = SubResource("RectangleShape2D_3e8h7")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="chao"]
-position = Vector2(615, -199)
+position = Vector2(615, -73)
 shape = SubResource("RectangleShape2D_uuld3")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="chao"]
-position = Vector2(-1090, -198)
+position = Vector2(-1096, -83)
 shape = SubResource("RectangleShape2D_uuld3")
 
 [node name="player" parent="." instance=ExtResource("8_dg3oo")]
-position = Vector2(-324, 291)
+position = Vector2(-796, 419)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(2, 2)
-limit_left = -1245
-limit_top = -29
-limit_right = 891
-limit_bottom = 564
+limit_left = -1260
+limit_top = -23
+limit_right = 876
+limit_bottom = 570
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("11_r1bum")
@@ -120,3 +122,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" parent="HUD" instance=ExtResource("9_yiks7")]
 position = Vector2(-238, 393)
+
+[node name="EnemyFly" parent="." instance=ExtResource("10_q6t08")]
+visible = true
+position = Vector2(-191, 428)
