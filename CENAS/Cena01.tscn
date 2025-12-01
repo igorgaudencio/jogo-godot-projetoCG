@@ -204,6 +204,9 @@ collision_layer = 2
 position = Vector2(-484, 379)
 collision_layer = 2
 
+[node name="Golem4" parent="." instance=ExtResource("26_yw1ev")]
+position = Vector2(-135, 320)
+
 [connection signal="body_entered" from="lava" to="lava" method="_on_body_entered"]
 [connection signal="timeout" from="lava/DamageTimer" to="lava" method="_on_damage_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

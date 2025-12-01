@@ -263,15 +263,15 @@ _data = {
 &"walk": SubResource("Animation_j32yp")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jucw4"]
+radius = 38.0
+height = 86.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jucw4"]
 size = Vector2(76, 73)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2efie"]
 size = Vector2(369, 172)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jucw4"]
-radius = 38.0
-height = 134.0
 
 [node name="Golem" type="CharacterBody2D"]
 collision_layer = 4
@@ -295,12 +295,22 @@ libraries = {
 autoplay = "walk"
 speed_scale = 0.5
 
+[node name="attack1" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="collision" type="CollisionShape2D" parent="attack1"]
+position = Vector2(-6, -38)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_jucw4")
+
 [node name="wall_detector" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(-9, -25)
 target_position = Vector2(44, 1)
 collision_mask = 2
 
 [node name="hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 script = ExtResource("7_jucw4")
 
@@ -309,16 +319,9 @@ position = Vector2(-4, -37.5)
 shape = SubResource("RectangleShape2D_jucw4")
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 position = Vector2(0, -87)
 shape = SubResource("RectangleShape2D_2efie")
-
-[node name="attack1" type="Area2D" parent="."]
-collision_layer = 16
-
-[node name="collision" type="CollisionShape2D" parent="attack1"]
-position = Vector2(-6, -38)
-rotation = -1.5707964
-shape = SubResource("CapsuleShape2D_jucw4")
